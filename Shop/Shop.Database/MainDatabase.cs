@@ -15,7 +15,7 @@ namespace Shop.Database
             throw new System.NotImplementedException();
         }
 
-        public override void ChangeModelInDatabase<TModel>(TModel model)
+        public override void ChangeModelInDatabase<TModel>(TModel model, TModel newModel)
         {
             throw new System.NotImplementedException();
         }

@@ -19,18 +19,13 @@ namespace Shop.Database.MongoDB
             var password = Environment.GetEnvironmentVariable("DB_PASSWORD");
             var client = new MongoClient(
                 $"mongodb+srv://{login}:{password}@helper-dlcu6.azure.mongodb.net/test?retryWrites=true&w=majority");
-            var database = client.GetDatabase(_databaseName);
+            var database = client.GetDatabase("Users");
             return database;
         }
         
-        internal IMongoCollection<TModel> GetCollection<TModel>()
+        public IMongoCollection<TModel> GetCollection<TModel>()
         {
-            return ConnectToDatabase().GetCollection<TModel>(_collectionName);
-        }
-
-        internal void AddNewModelInCollection<TModel>(TModel model)
-        {
-            GetCollection<TModel>().InsertOne(model);
+            return ConnectToDatabase().GetCollection<TModel>("User");
         }
     }
 }

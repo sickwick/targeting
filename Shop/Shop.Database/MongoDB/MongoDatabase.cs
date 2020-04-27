@@ -1,37 +1,39 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using MongoDB.Driver;
-using Shop.Database.Interfaces;
-using Shop.Database.MongoDB;
 
-namespace Shop.Database
+namespace Shop.Database.MongoDB
 {
     public class MongoDatabase: DbDecorator
     {
         private MongoDatabaseContext _databaseContext;
-        public MongoDatabase(DatabaseBase database, MongoDatabaseContext databaseContext):base(database)
+        public MongoDatabase(DatabaseBase databaseBase, MongoDatabaseContext databaseContext ):base(databaseBase)
         {
             _databaseContext = databaseContext;
         }
 
-        public override Task<List<TModel>> GetDatabaseList<TModel>()
+        public  override async Task<List<TModel>> GetDatabaseList<TModel>()
         {
-            return _databaseContext.GetCollection<TModel>().Find(Builders<TModel>.Filter.Empty).ToListAsync();
+            var userCollection = _databaseContext.GetCollection<TModel>()
+                .Find(Builders<TModel>.Filter.Empty);
+            if (userCollection == null) throw new NullReferenceException();
+
+            return await userCollection.ToListAsync();
         }
 
         public override void AddInDatabase<TModel>(TModel model)
         {
-            throw new System.NotImplementedException();
+            _databaseContext.GetCollection<TModel>().InsertOne(model);
         }
-
-        public override void ChangeModelInDatabase<TModel>(TModel model)
+        
+        public override void ChangeModelInDatabase<TModel>(TModel model, TModel newModel)
         {
-            throw new System.NotImplementedException();
+            
         }
-
+        
         public override void DeleteModelFromDatabase<TModel>(TModel model)
         {
-            throw new System.NotImplementedException();
         }
     }
 }

@@ -1,5 +1,3 @@
-using Shop.Database.Interfaces;
-
 namespace Shop.Database
 {
     public abstract class DbDecorator: DatabaseBase
