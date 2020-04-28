@@ -13,4 +13,11 @@
         <PackageReference Include="coverlet.collector" Version="1.0.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\FakeLibrary\FakeLibrary.csproj" />
+      <ProjectReference Include="..\Shop.Database\Shop.Database.csproj" />
+      <ProjectReference Include="..\Shop.Targeting\Shop.Targeting.csproj" />
+      <ProjectReference Include="..\Shop.Web\Shop.Web.csproj" />
+    </ItemGroup>
+
 </Project>

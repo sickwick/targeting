@@ -7,7 +7,7 @@ namespace Shop.Database
     {
         public override Task<List<TModel>> GetDatabaseList<TModel>()
         {
-            throw new System.NotImplementedException();
+            return null;
         }
 
         public override void AddInDatabase<TModel>(TModel model)
