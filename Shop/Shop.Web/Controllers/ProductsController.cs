@@ -1,6 +1,8 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Shop.Database;
 using Shop.Web.Interfaces;
+using Shop.Web.Services;
 
 namespace Shop.Web.Controllers
 {
@@ -10,9 +12,9 @@ namespace Shop.Web.Controllers
     {
         private readonly IProductService _productService;
         
-        public ProductsController(IProductService productService)
+        public ProductsController()
         {
-            _productService = productService;
+            _productService = new ProductService(new MainDatabase());
         }
         [HttpGet]
         public Task<IActionResult> GetAllProducts()

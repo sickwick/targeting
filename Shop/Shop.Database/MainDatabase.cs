@@ -1,13 +1,21 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using FakeLibrary;
+using FakeLibrary.CopiedModels;
 
 namespace Shop.Database
 {
     public class MainDatabase: DatabaseBase
     {
+        private readonly ProductsStub _productsStub;
+
+        public MainDatabase()
+        {
+            _productsStub = new ProductsStub();
+        }
         public override Task<List<TModel>> GetDatabaseList<TModel>()
         {
-            return null;
+            return Task.FromResult(_productsStub.Products.SerializeObject().DeserializeObject<List<TModel>>());
         }
 
         public override void AddInDatabase<TModel>(TModel model)

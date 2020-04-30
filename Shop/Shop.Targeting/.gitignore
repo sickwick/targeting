@@ -503,3 +503,4 @@ MigrationBackup/
 # End of https://www.gitignore.io/api/rider,linux,macos,windows,dotnetcore,visualstudio
 
 obj/
+/Properties/launchSettings.json

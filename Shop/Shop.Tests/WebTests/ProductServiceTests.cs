@@ -35,16 +35,14 @@ namespace Shop.Tests.WebTests
         {
             Assert.Equal(_productService.GetAllProducts().SerializeObject(),
                 _productsStub.Products.SerializeObject());
-            Assert.Equal(_productService.GetAllProducts().SerializeObject(),
-                _productsStub.Products.SerializeObject());
         }
 
         [Fact]
-        public void Is_GetProduct_have_check_for_parameter()
+        public void Is_GetProduct_have_check_parameter()
         {
-            Assert.Null(_productService.GetProduct(default).SerializeObject());
-            Assert.Null(_productService.GetProduct(-1).SerializeObject());
-            Assert.Null(_productService.GetProduct(Int64.MaxValue));
+            Assert.Equal(_productService.GetProduct(default).SerializeObject(), new Product().SerializeObject());
+            Assert.Equal(_productService.GetProduct(-1).SerializeObject(), new Product().SerializeObject());
+            Assert.Equal(_productService.GetProduct(Int64.MaxValue).SerializeObject(), new Product().SerializeObject());
         }
 
         [Fact]
@@ -52,6 +50,28 @@ namespace Shop.Tests.WebTests
         {
             Assert.Equal(_productService.GetProduct(12345).SerializeObject(),
                 _productsStub.Products.FirstOrDefault(i => i.Article == 12345).SerializeObject());
+            Assert.Equal(_productService.GetProduct(12345).Id.SerializeObject(),
+                _productsStub.Products.FirstOrDefault(i => i.Article == 12345).Id.SerializeObject());
+            Assert.NotEqual(_productService.GetProduct(12345).Id.SerializeObject(),
+                _productsStub.Products.FirstOrDefault(i => i.Article == 12454).Id.SerializeObject());
+        }
+
+        [Fact]
+        public void Is_GetSizes_have_check_parameter()
+        {
+            Assert.Equal(_productService.GetSizes(default).SerializeObject(), new Product().SerializeObject());
+            Assert.Equal(_productService.GetSizes(-1).SerializeObject(), new Product().SerializeObject());
+            Assert.Equal(_productService.GetSizes(Int64.MaxValue).SerializeObject(), new Product().SerializeObject());
+        }
+
+        [Fact]
+        public void Is_GetSizes_return_correct_data()
+        {
+            Assert.Equal(_productService.GetSizes(12345).SerializeObject(),
+                _productsStub.Products.FirstOrDefault(i => i.Article == 12345).SizesAvailable.SerializeObject());
+            Assert.True(_productService.GetSizes(12345).Any());
+                Assert.NotEqual(_productService.GetSizes(12345).SerializeObject(),
+                _productsStub.Products.FirstOrDefault(i => i.Article == 12454).SizesAvailable.SerializeObject());
         }
     }
 }

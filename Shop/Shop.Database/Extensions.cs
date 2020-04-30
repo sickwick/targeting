@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,11 @@ namespace Shop.Database
         public static string SerializeObject<TModel>(this TModel model)
         {
             return JsonConvert.SerializeObject(model);
+        }
+        
+        public static TModel DeserializeObject<TModel>(this string jsonString)
+        {
+            return JsonConvert.DeserializeObject<TModel>(jsonString) ?? throw new NullReferenceException();
         }
         
         public static bool IsNullOrEmpty<T>(this IEnumerable<T> enumerable)

@@ -7,7 +7,7 @@ namespace Shop.Web.Interfaces
     {
         public List<Product> GetAllProducts();
         public Product GetProduct(long article);
-        public Sizes GetSizes(long article);
+        public List<Sizes> GetSizes(long article);
         public bool AddNewProduct(Product product);
     }
 }
