@@ -15,6 +15,7 @@ namespace Shop.Database
         }
         public override Task<List<TModel>> GetDatabaseList<TModel>()
         {
+            var k = Task.FromResult(_productsStub.Products.SerializeObject().DeserializeObject<List<TModel>>()).Result;
             return Task.FromResult(_productsStub.Products.SerializeObject().DeserializeObject<List<TModel>>());
         }
 
