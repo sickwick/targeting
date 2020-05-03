@@ -1,4 +1,4 @@
-namespace Shop.Web.Models
+namespace Shop.Database.Models
 {
     public struct Sizes
     {

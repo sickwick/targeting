@@ -1,16 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using Shop.Database;
+using Shop.Database.Interfaces;
 
 namespace Shop.Targeting
 {
@@ -28,10 +27,14 @@ namespace Shop.Targeting
         {
             services.AddControllers();
             services.AddCors();
+            services.AddMemoryCache();
             services.AddDistributedMemoryCache();
             services.AddMvc(option => option.EnableEndpointRouting = false)
                 .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
                 .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+            services.TryAdd(ServiceDescriptor.Singleton<IMemoryCache, MemoryCache>());
+            // TODO: Перенести в отдельный файл
+            services.AddTransient<IProductDataProvider, ProductDataProvider>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

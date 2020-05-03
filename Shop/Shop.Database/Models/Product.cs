@@ -1,12 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Data.Common;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Shop.Web.Models
+namespace Shop.Database.Models
 {
-    public struct Product
+    public class Product
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]

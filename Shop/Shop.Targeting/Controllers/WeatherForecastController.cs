@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Caching.Memory;
 using Shop.Database;
+using Shop.Database.Interfaces;
 using Shop.Database.MongoDB;
 
 namespace Shop.Targeting.Controllers
@@ -14,16 +12,20 @@ namespace Shop.Targeting.Controllers
     public class WeatherForecastController : ControllerBase
     {
         private DatabaseBase _provider;
-        public WeatherForecastController()
+        private IMemoryCache _memoryCache;
+        public WeatherForecastController(IProductDataProvider productDataProvider, IMemoryCache memoryCache)
         {
             _provider = new MainDatabase();
+            _memoryCache = memoryCache;
         }
         [HttpGet]
-        public async Task<ActionResult> GetAll()
+        public ActionResult GetAll()
         {
-            _provider = new MongoDatabase(_provider, new MongoDatabaseContext(
+            _provider = new MongoDatabase(null, new MongoDatabaseContext(
                 Environment.GetEnvironmentVariable("DB_NAME"),"User"));
-            return Ok(await _provider.GetDatabaseList<UserModel>());
+            // var k = ProductListHolder.GetInstance().ProductList;
+            var k = new ProductDataProvider(_memoryCache);
+            return Ok(k.GetProducts());
         }
     }
 }
