@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Shop.Web.Models;
+using Shop.Database.Models;
 
 namespace Shop.Web.Interfaces
 {

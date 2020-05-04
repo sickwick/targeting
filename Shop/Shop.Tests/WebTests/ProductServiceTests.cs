@@ -2,9 +2,9 @@ using System;
 using System.Linq;
 using FakeLibrary;
 using Shop.Database;
+using Shop.Database.Models;
 using Shop.Tests.Mocks;
 using Shop.Web.Interfaces;
-using Shop.Web.Models;
 using Shop.Web.Services;
 using Xunit;
 
@@ -18,7 +18,7 @@ namespace Shop.Tests.WebTests
 
         public ProductServiceTests()
         {
-            _productService = new ProductService(new DatabaseMock());
+            _productService = new ProductService();
             _productsStub = new ProductsStub();
             _databaseMock = new DatabaseMock();
         }
@@ -26,8 +26,8 @@ namespace Shop.Tests.WebTests
         [Fact]
         public void Is_GetAllProducts_have_check_for_null()
         {
-            Assert.NotNull(new ProductService(_databaseMock).SerializeObject());
-            Assert.NotNull(new ProductService(null).GetAllProducts().SerializeObject());
+            Assert.NotNull(new ProductService().SerializeObject());
+            Assert.NotNull(new ProductService().GetAllProducts().SerializeObject());
         }
 
         [Fact]
@@ -40,10 +40,10 @@ namespace Shop.Tests.WebTests
         [Fact]
         public void Is_GetProduct_have_check_parameter()
         {
-            Assert.Throws<ArgumentNullException>(() => _productService.GetProduct(default).SerializeObject());
-            Assert.Throws<ArgumentNullException>(() => _productService.GetProduct(-1).SerializeObject());
-            Assert.Throws<ArgumentNullException>(() => _productService.GetProduct(long.MaxValue).SerializeObject());
-            Assert.Throws<ArgumentNullException>(() => _productService.GetProduct(long.MinValue).SerializeObject());
+            Assert.Throws<ArgumentException>(() => _productService.GetProduct(default));
+            Assert.Throws<ArgumentException>(() => _productService.GetProduct(-1));
+            Assert.Throws<ArgumentException>(() => _productService.GetProduct(long.MaxValue));
+            Assert.Throws<ArgumentException>(() => _productService.GetProduct(long.MinValue));
             Assert.Equal(_productService.GetProduct(12345).SerializeObject(),
                 _productsStub.Products.FirstOrDefault(i => i.Article == 12345).SerializeObject());
         }

@@ -2,60 +2,35 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using Microsoft.Extensions.Caching.Memory;
 using Shop.Database;
-using Shop.Database.MongoDB;
+using Shop.Database.Models;
 using Shop.Web.Interfaces;
-using Shop.Web.Models;
 
 namespace Shop.Web.Services
 {
     public class ProductService : IProductService
     {
-        private readonly DatabaseBase _databaseBase;
-        private readonly MongoDatabase _mongoDatabase;
+        private readonly ProductDataProvider _productDataProvider;
 
-        public ProductService(DatabaseBase databaseBase)
+        public ProductService()
         {
-            _databaseBase = databaseBase;
-            _mongoDatabase = new MongoDatabase(_databaseBase,
-                new MongoDatabaseContext(Environment.GetEnvironmentVariable("DB_NAME"), "User"));
+            _productDataProvider = new ProductDataProvider(new MemoryCache(new MemoryCacheOptions()));
         }
 
         public List<Product> GetAllProducts()
         {
-            try
-            {
-                var result = _databaseBase.GetDatabaseList<Product>().Result ?? throw new NullReferenceException();
-                return result;
-            }
-            catch
-            {
-                return new MainDatabase().GetDatabaseList<Product>().Result;
-            }
+            return _productDataProvider.GetProducts();
         }
 
         public Product GetProduct(long article)
         {
-            if (CheckParameter(article))
+            if (CheckParameter(article) && _productDataProvider.GetProducts().Any(p=>p.Article == article))
             {
-                try
-                { 
-                    var result = _databaseBase.GetDatabaseList<Product>().Result.FirstOrDefault(i => i.Article == article);
-                    return result.Article != default ? result : throw new NullReferenceException();
-                }
-                catch
-                {
-                    var products = new MainDatabase().GetDatabaseList<Product>().Result;
-                    if (products.Any(i => i.Article == article))
-                    {
-                        return products.FirstOrDefault(product => product.Article == article);
-                    }
-                    
-                    throw new ArgumentException();
-                }   
+                return _productDataProvider.GetProducts().FirstOrDefault(p => p.Article == article);
             }
             
-            throw new ArgumentNullException();
+            throw new ArgumentException();
         }
 
         public List<Sizes> GetSizes(long article)
@@ -70,27 +45,27 @@ namespace Shop.Web.Services
 
         public bool AddNewProduct(Product product)
         {
-            if (CheckParameter(product))
-            {
-                try
-                {
-                    if (_mongoDatabase.GetDatabaseList<Product>().Result.All(p => p.Article != product.Article))
-                    {
-                        _mongoDatabase.AddInDatabase(product);
-                        return _mongoDatabase.GetDatabaseList<Product>().Result.Any(p => p.Article == product.Article);
-                    }
-                    
-                    throw new InvalidEnumArgumentException();
-                }
-                catch
-                {
-                    var db = new MainDatabase();
-                    db.AddInDatabase(product);
-                    return db.GetDatabaseList<Product>().Result.Any(p=>p.Article == product.Article);
-                }
-            }
+            // if (CheckParameter(product))
+            // {
+            //     try
+            //     {
+            //         if (_mongoDatabase.GetDatabaseList<Product>().Result.All(p => p.Article != product.Article))
+            //         {
+            //             _mongoDatabase.AddInDatabase(product);
+            //             return _mongoDatabase.GetDatabaseList<Product>().Result.Any(p => p.Article == product.Article);
+            //         }
+            //         
+            //         throw new InvalidEnumArgumentException();
+            //     }
+            //     catch
+            //     {
+            //         var db = new MainDatabase();
+            //         db.AddInDatabase(product);
+            //         return db.GetDatabaseList<Product>().Result.Any(p=>p.Article == product.Article);
+            // }
+        // }
             
-            throw new ArgumentNullException();
+            throw new NotImplementedException();
         }
 
         private bool CheckParameter(long param)
