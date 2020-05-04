@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using FakeLibrary;
+using Microsoft.Extensions.Caching.Memory;
 using Shop.Database;
 using Shop.Database.Models;
 using Shop.Tests.Mocks;
@@ -18,7 +19,7 @@ namespace Shop.Tests.WebTests
 
         public ProductServiceTests()
         {
-            _productService = new ProductService();
+            _productService = new ProductService(new ProductDataProvider(new MemoryCache(new MemoryCacheOptions())));
             _productsStub = new ProductsStub();
             _databaseMock = new DatabaseMock();
         }
@@ -26,8 +27,8 @@ namespace Shop.Tests.WebTests
         [Fact]
         public void Is_GetAllProducts_have_check_for_null()
         {
-            Assert.NotNull(new ProductService().SerializeObject());
-            Assert.NotNull(new ProductService().GetAllProducts().SerializeObject());
+            Assert.NotNull(_productService.SerializeObject());
+            Assert.NotNull(_productService.GetAllProducts().SerializeObject());
         }
 
         [Fact]

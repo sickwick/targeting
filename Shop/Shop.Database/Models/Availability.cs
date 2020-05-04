@@ -1,8 +1,8 @@
 namespace Shop.Database.Models
 {
-    public struct Availability
+    public class Availability
     {
-        public bool IsAvailable;
-        public int QuantityInStock;
+        public bool IsAvailable { get; set; }
+        public int QuantityInStock { get; set; }
     }
 }

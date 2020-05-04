@@ -16,14 +16,9 @@ namespace Shop.Database
 
         public ProductDataProvider(IMemoryCache memoryCache)
         {
+            _databaseBase = new MainDatabase();
             _databaseBase = new MongoDatabase(_databaseBase,
                 new MongoDatabaseContext(Environment.GetEnvironmentVariable("DB_NAME"), "User"));
-            _cache = memoryCache;
-        }
-
-        private IMemoryCache GetMemoryCache(IMemoryCache memoryCache)
-        {
-            return memoryCache;
         }
 
         /// <summary>

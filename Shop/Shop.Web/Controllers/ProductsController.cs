@@ -1,6 +1,8 @@
+using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Shop.Database;
+using Shop.Database.Models;
 using Shop.Web.Interfaces;
 using Shop.Web.Services;
 
@@ -12,14 +14,49 @@ namespace Shop.Web.Controllers
     {
         private readonly IProductService _productService;
         
-        public ProductsController()
+        public ProductsController(IProductService productService)
         {
-            _productService = new ProductService();
+            _productService = productService;
         }
         [HttpGet]
-        public Task<IActionResult> GetAllProducts()
+        public IActionResult GetAllProducts()
         {
-            return null;
+            try
+            {
+                return Ok(_productService.GetAllProducts());
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("product")]
+        public IActionResult GetProduct([FromQuery] Product product)
+        {
+            try
+            {
+                return Ok(_productService.GetProduct(product.Article));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("size")]
+        public IActionResult GetSizes([FromQuery] Product product)
+        {
+            try
+            {
+                return Ok(_productService.GetSizes(product.Article));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

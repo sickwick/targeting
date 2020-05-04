@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using Microsoft.Extensions.Caching.Memory;
 using Shop.Database;
+using Shop.Database.Interfaces;
 using Shop.Database.Models;
 using Shop.Web.Interfaces;
 
@@ -11,16 +12,21 @@ namespace Shop.Web.Services
 {
     public class ProductService : IProductService
     {
-        private readonly ProductDataProvider _productDataProvider;
+        private readonly IProductDataProvider _productDataProvider;
 
-        public ProductService()
+        public ProductService(IProductDataProvider productDataProvider)
         {
-            _productDataProvider = new ProductDataProvider(new MemoryCache(new MemoryCacheOptions()));
+            _productDataProvider = productDataProvider;
         }
 
         public List<Product> GetAllProducts()
         {
-            return _productDataProvider.GetProducts();
+            if (!_productDataProvider.GetProducts().IsNullOrEmpty())
+            {
+                return _productDataProvider.GetProducts();
+            }
+            
+            throw new NullReferenceException();
         }
 
         public Product GetProduct(long article)

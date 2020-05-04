@@ -8,14 +8,15 @@ namespace Shop.Database.Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Id;
-        public long Article;
-        public string Category;
-        public string Title;
-        public string Label;
-        public string Season;
-        public bool Gender;
-        public string Photo;
-        public IEnumerable<Sizes> SizesAvailable;
+        public string Id { get; set; }
+
+        public long Article { get; set; }
+        public string Category { get; set; }
+        public string Title { get; set; }
+        public string Label { get; set; }
+        public string Season { get; set; }
+        public bool Gender { get; set; }
+        public string Photo { get; set; }
+        public IEnumerable<Sizes> SizesAvailable { get; set; }
     }
 }

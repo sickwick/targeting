@@ -1,9 +1,17 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
+using Shop.Database;
+using Shop.Database.Interfaces;
+using Shop.Web.Interfaces;
+using Shop.Web.Services;
 
 namespace Shop.Web
 {
@@ -25,6 +33,16 @@ namespace Shop.Web
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+            
+            services.AddCors();
+            services.AddMemoryCache();
+            services.AddDistributedMemoryCache();
+            services.AddMvc(option => option.EnableEndpointRouting = false)
+                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
+                .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+            services.TryAdd(ServiceDescriptor.Singleton<IMemoryCache, MemoryCache>());
+            services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<IProductDataProvider, ProductDataProvider>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
