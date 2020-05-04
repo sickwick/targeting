@@ -14,7 +14,7 @@ namespace Shop.Web.Controllers
         
         public ProductsController()
         {
-            _productService = new ProductService(new MainDatabase());
+            _productService = new ProductService();
         }
         [HttpGet]
         public Task<IActionResult> GetAllProducts()

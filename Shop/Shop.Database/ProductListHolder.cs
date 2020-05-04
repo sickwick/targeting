@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using MongoDB.Bson.Serialization.Serializers;
 using Shop.Database.Interfaces;
 using Shop.Database.Models;
@@ -11,19 +13,14 @@ namespace Shop.Database
     public sealed class ProductListHolder
     {
         private static readonly Lazy<ProductListHolder> _singleInstance =
-            new Lazy<ProductListHolder>(() => new ProductListHolder());
+            new Lazy<ProductListHolder>(()=>new ProductListHolder());
 
-        private readonly IProductDataProvider _productDataProvider;
-        
         public List<Product> ProductList;
-
-        private readonly Containers _containers;
+        private IProductDataProvider _productDataProvider;
 
         private ProductListHolder()
         {
-            _containers = new Containers();
-            // _productDataProvider = new ProductDataProvider();
-
+            _productDataProvider = new ProductDataProvider(new MemoryCache(new MemoryCacheOptions()));
             ProductList = _productDataProvider.GetProducts();
         }
 

@@ -13,10 +13,10 @@ namespace Shop.Targeting.Controllers
     {
         private DatabaseBase _provider;
         private IMemoryCache _memoryCache;
-        public WeatherForecastController(IProductDataProvider productDataProvider, IMemoryCache memoryCache)
+        public WeatherForecastController()
         {
-            _provider = new MainDatabase();
-            _memoryCache = memoryCache;
+            // _provider = new MainDatabase();
+            // _memoryCache = memoryCache;
         }
         [HttpGet]
         public ActionResult GetAll()
@@ -24,8 +24,8 @@ namespace Shop.Targeting.Controllers
             _provider = new MongoDatabase(null, new MongoDatabaseContext(
                 Environment.GetEnvironmentVariable("DB_NAME"),"User"));
             // var k = ProductListHolder.GetInstance().ProductList;
-            var k = new ProductDataProvider(_memoryCache);
-            return Ok(k.GetProducts());
+            // var k = new ProductDataProvider(_memoryCache);
+            return Ok(ProductListHolder.GetInstance().ProductList);
         }
     }
 }
