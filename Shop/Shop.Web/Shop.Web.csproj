@@ -29,6 +29,9 @@
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
     <None Include="ClientApp\src\app\board\board.module.ts" />
     <None Include="ClientApp\src\app\board\components\product\product.component.spec.ts" />
+    <None Include="ClientApp\src\app\Models\IAvailability.ts" />
+    <None Include="ClientApp\src\app\Models\IProduct.ts" />
+    <None Include="ClientApp\src\app\Models\ISizes.ts" />
   </ItemGroup>
 
   <ItemGroup>
