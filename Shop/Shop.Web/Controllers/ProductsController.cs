@@ -58,5 +58,18 @@ namespace Shop.Web.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpPost]
+        public IActionResult AddProduct(Product product)
+        {
+            try
+            {
+                return Ok(_productService.AddNewProduct(product));
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }
