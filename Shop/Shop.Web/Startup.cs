@@ -1,3 +1,4 @@
+using Autofac;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -34,15 +35,18 @@ namespace Shop.Web
                 configuration.RootPath = "ClientApp/dist";
             });
             
+            
             services.AddCors();
             services.AddMemoryCache();
             services.AddDistributedMemoryCache();
             services.AddMvc(option => option.EnableEndpointRouting = false)
                 .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
                 .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
-            services.TryAdd(ServiceDescriptor.Singleton<IMemoryCache, MemoryCache>());
-            services.AddTransient<IProductService, ProductService>();
-            services.AddTransient<IProductDataProvider, ProductDataProvider>();
+        }
+
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            builder.RegisterModule<AutofacModule>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
