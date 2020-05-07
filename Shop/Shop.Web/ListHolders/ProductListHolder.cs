@@ -1,14 +1,11 @@
 using System;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
-using MongoDB.Bson.Serialization.Serializers;
+using Shop.Database;
 using Shop.Database.Interfaces;
 using Shop.Database.Models;
-using Unity;
 
-
-namespace Shop.Database
+namespace Shop.Web.ListHolders
 {
     public sealed class ProductListHolder
     {
