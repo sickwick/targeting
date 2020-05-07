@@ -5,7 +5,7 @@ using Shop.Database;
 using Shop.Database.Interfaces;
 using Shop.Database.Models;
 
-namespace Shop.Web
+namespace Shop.Web.ListHolders
 {
     public sealed class ProductListHolder
     {
