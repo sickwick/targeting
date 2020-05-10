@@ -1,4 +1,0 @@
-bin
-obj
-.gitignore
-ClientApp/node_modules
