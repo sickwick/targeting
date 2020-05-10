@@ -17,6 +17,7 @@
       <ProjectReference Include="..\FakeLibrary\FakeLibrary.csproj" />
       <ProjectReference Include="..\Shop.Database\Shop.Database.csproj" />
       <ProjectReference Include="..\Shop.Targeting\Shop.Targeting.csproj" />
+      <ProjectReference Include="..\Shop.WebAPI\Shop.WebAPI.csproj" />
       <ProjectReference Include="..\Shop.Web\Shop.Web.csproj" />
     </ItemGroup>
 

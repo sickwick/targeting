@@ -5,8 +5,8 @@ using Microsoft.Extensions.Caching.Memory;
 using Shop.Database;
 using Shop.Database.Models;
 using Shop.Tests.Mocks;
-using Shop.Web.Interfaces;
-using Shop.Web.Services;
+using Shop.WebAPI.Interfaces;
+using Shop.WebAPI.Services;
 using Xunit;
 
 namespace Shop.Tests.WebTests
