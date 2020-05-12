@@ -1,0 +1,20 @@
+.container-product {
+  display: grid;
+  grid-template-columns: 46vw 42vw;
+  grid-template-rows: 90vh;
+  grid-row-gap: 2vh;
+  grid-column-gap: 2vh;
+  margin-left: 4vw;
+
+  grid-template-areas: "photos info";
+
+  .photos {
+    grid-area: photos;
+
+  }
+
+  .info {
+    grid-area: info;
+    background-color: pink;
+  }
+}

@@ -1,0 +1,11 @@
+<a [routerLink]="['/product/'+ product.article]">
+  <img class="images" src="{{product.photo}}" alt="  ">
+  <div class="footer">
+    <div class="about">
+      <p class="about">{{product.label}} {{product.title}}</p>
+      <p class="about">{{product.category}}</p>
+    </div>
+    <span class="material-icons favourite-outlined">turned_in_not</span>
+    <span class="material-icons favourite-full">turned_in</span>
+  </div>
+</a>

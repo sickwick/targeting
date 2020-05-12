@@ -1,0 +1,42 @@
+.images {
+  width: 100%;
+  height: 80%;
+  padding-bottom: 1vh;
+}
+
+.footer {
+  height: 10%;
+  display: flex;
+  flex-direction: row;
+
+  .about {
+    display: flex;
+    flex-direction: column;
+    width: 85%;
+    line-height: 0.5;
+    color: black;
+  }
+
+  .favourite-outlined {
+    color: black;
+    cursor: pointer;
+  }
+
+  .favourite-full {
+    display: none;
+    color: black;
+    cursor: pointer;
+  }
+
+  .favourite-outlined:hover {
+    display: none;
+  }
+  .favourite-outlined:hover .favourite-full {
+    display: block;
+    color: black;
+  }
+}
+
+a {
+  text-decoration: none;
+}

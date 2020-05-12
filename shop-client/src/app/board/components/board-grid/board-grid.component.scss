@@ -1,0 +1,28 @@
+.container-main {
+  display: grid;
+  grid-template-columns: 45vw;
+  grid-template-rows: 4vh auto;
+  grid-template-areas:
+    "board";
+  justify-content: center;
+}
+
+.sm-board {
+  grid-area: board;
+  display: grid;
+  grid-template-columns: repeat(4, 9vw);
+  grid-template-rows: 12vh;
+  grid-row-gap: 2vh;
+  justify-content: space-between;
+  margin-top: 1vh;
+}
+
+.hg-board {
+  grid-area: board;
+  display: grid;
+  grid-template-columns: repeat(3, 20vw);
+  grid-template-rows: repeat(2, 43vh);
+  grid-row-gap: 2vh;
+  justify-content: space-between;
+  margin-top: 1vh;
+}
