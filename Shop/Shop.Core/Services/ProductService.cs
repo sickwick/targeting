@@ -1,20 +1,24 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Shop.Database;
-using Shop.Database.Interfaces;
-using Shop.Database.Models;
+using Autofac;
+using Shop.Core.Interfaces.DataProviders;
+using Shop.Core.ListHolders;
+using Shop.Core.Models;
+using Shop.Database.Extensions;
 using Shop.WebAPI.Interfaces;
 
-namespace Shop.WebAPI.Services
+namespace Shop.Core.Services
 {
     public class ProductService : IProductService
     {
         private readonly IProductDataProvider _productDataProvider;
+        private readonly List<Product> Products;
 
-        public ProductService(IProductDataProvider productDataProvider)
+        public ProductService(IProductDataProvider productDataProvider, IServiceProvider container)
         {
             _productDataProvider = productDataProvider;
+            Products = ProductListHolder.GetInstance(container).ProductList;
         }
 
         public List<Product> GetAllProducts()

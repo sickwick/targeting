@@ -1,13 +1,9 @@
 using System.Collections.Generic;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
 
-namespace Shop.Database.Models
+namespace Shop.Database.Stubs
 {
-    public class Product
+    public class ProductModel
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
 
         public long Article { get; set; }
@@ -17,6 +13,6 @@ namespace Shop.Database.Models
         public string Season { get; set; }
         public bool Gender { get; set; }
         public string Photo { get; set; }
-        public IEnumerable<Sizes> SizesAvailable { get; set; }
+        public IEnumerable<SizesModel> SizesAvailable { get; set; }
     }
 }

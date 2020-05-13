@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using FakeLibrary;
-using FakeLibrary.CopiedModels;
+using Shop.Database.Stubs;
+using Newtonsoft.Json;
 
 namespace Shop.Database
 {
-    public class MainDatabase: DatabaseBase
+    public class MainDatabase : DatabaseBase
     {
         private readonly ProductsStub _productsStub;
 
@@ -13,10 +13,11 @@ namespace Shop.Database
         {
             _productsStub = new ProductsStub();
         }
+
         public override Task<List<TModel>> GetDatabaseList<TModel>()
         {
-            var k = Task.FromResult(_productsStub.Products.SerializeObject().DeserializeObject<List<TModel>>()).Result;
-            return Task.FromResult(_productsStub.Products.SerializeObject().DeserializeObject<List<TModel>>());
+            return Task.FromResult(
+                JsonConvert.DeserializeObject<List<TModel>>(JsonConvert.SerializeObject(_productsStub.Products)));
         }
 
         public override void AddInDatabase<TModel>(TModel model)

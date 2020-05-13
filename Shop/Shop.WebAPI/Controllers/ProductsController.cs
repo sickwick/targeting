@@ -1,6 +1,6 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
-using Shop.Database.Models;
+using Shop.Core.Models;
 using Shop.WebAPI.Interfaces;
 
 namespace Shop.WebAPI.Controllers

@@ -8,11 +8,10 @@
       <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
       <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="3.1.3" />
       <PackageReference Include="MongoDB.Driver" Version="2.10.3" />
-      <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\FakeLibrary\FakeLibrary.csproj" />
+      <Folder Include="Interfaces" />
     </ItemGroup>
 
 </Project>
