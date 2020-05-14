@@ -6,5 +6,6 @@ namespace Shop.Core.Interfaces.DataProviders
     public interface IProductDataProvider
     {
         List<Product> GetProducts();
+        void AddProductInDatabase(Product product);
     }
 }

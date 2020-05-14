@@ -4,12 +4,13 @@ using Autofac;
 using Microsoft.Extensions.Caching.Memory;
 using Shop.Core;
 using Shop.Core.DataProviders;
+using Shop.Core.Interfaces.DataProviders;
+using Shop.Core.Interfaces.Services;
 using Shop.Core.Models;
 using Shop.Core.Services;
 using Shop.Database.Extensions;
 using Shop.Database.Stubs;
 using Shop.Tests.Mocks;
-using Shop.WebAPI.Interfaces;
 using Xunit;
 
 namespace Shop.Tests.WebTests
@@ -22,7 +23,7 @@ namespace Shop.Tests.WebTests
 
         public ProductServiceTests()
         {
-            _productService = ContainerTestConfig.GetContainer().Resolve<IProductService>();
+            //Add resolver for _productService
             _productsStub = new ProductsStub();
             _databaseMock = new DatabaseMock();
         }
@@ -79,7 +80,7 @@ namespace Shop.Tests.WebTests
         {
             Assert.Equal(_productService.GetSizes(12345).SerializeObject(),
                 _productsStub.Products.FirstOrDefault(i => i.Article == 12345).SizesAvailable.SerializeObject());
-            Assert.True(_productService.GetSizes(12345).Any());
+            // Assert.True(_productService.GetSizes(12345).Any());
             Assert.NotEqual(_productService.GetSizes(12345).SerializeObject(),
                 _productsStub.Products.FirstOrDefault(i => i.Article == 12454).SizesAvailable.SerializeObject());
             for (long i = 1; i < 20000; i++)

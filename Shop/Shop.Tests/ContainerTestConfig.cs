@@ -1,9 +1,12 @@
 using System;
 using Autofac;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.DependencyInjection;
+using Shop.Core;
 using Shop.Core.DataProviders;
 using Shop.Core.Interfaces.DataProviders;
+using Shop.Core.Interfaces.Services;
 using Shop.Core.Services;
-using Shop.WebAPI.Interfaces;
 
 namespace Shop.Tests
 {
@@ -11,13 +14,14 @@ namespace Shop.Tests
     {
         private static Lazy<ILifetimeScope> _lazyContainer = new Lazy<ILifetimeScope>(BuildAutofacContainer);
 
-        private static ILifetimeScope BuildAutofacContainer()
+        public static ILifetimeScope BuildAutofacContainer()
         {
             var builder = new ContainerBuilder();
+            builder.RegisterType<ServiceProvider>().As<IServiceProvider>().ExternallyOwned();
+            builder.Register(m=>new MemoryCache(new MemoryCacheOptions())).As<IMemoryCache>().ExternallyOwned();
+            builder.RegisterType<ProductService>().As<IProductService>().SingleInstance();
+            builder.RegisterType<ProductDataProvider>().As<IProductDataProvider>().SingleInstance();
 
-            builder.RegisterType<IProductService>().As<ProductService>();
-            builder.RegisterType<IProductDataProvider>().As<ProductDataProvider>();
-            
             return builder.Build();
         }
 

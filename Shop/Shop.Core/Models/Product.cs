@@ -17,6 +17,6 @@ namespace Shop.Core.Models
         public string Season { get; set; }
         public bool Gender { get; set; }
         public string Photo { get; set; }
-        public IEnumerable<Sizes> SizesAvailable { get; set; }
+        public Sizes SizesAvailable { get; set; }
     }
 }

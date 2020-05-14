@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Autofac;
 using Shop.Core.Interfaces.DataProviders;
+using Shop.Core.Interfaces.Services;
 using Shop.Core.ListHolders;
 using Shop.Core.Models;
 using Shop.Database.Extensions;
-using Shop.WebAPI.Interfaces;
 
 namespace Shop.Core.Services
 {
@@ -27,25 +27,25 @@ namespace Shop.Core.Services
             {
                 return _productDataProvider.GetProducts();
             }
-            
+
             throw new NullReferenceException();
         }
 
         public Product GetProduct(long article)
         {
-            if (CheckParameter(article) && _productDataProvider.GetProducts().Any(p=>p.Article == article))
+            if (CheckParameter(article) && _productDataProvider.GetProducts().Any(p => p.Article == article))
             {
                 return _productDataProvider.GetProducts().FirstOrDefault(p => p.Article == article);
             }
-            
+
             throw new ArgumentException();
         }
 
-        public List<Sizes> GetSizes(long article)
+        public Sizes GetSizes(long article)
         {
             if (CheckParameter(article))
             {
-                return GetProduct(article).SizesAvailable.ToList();
+                return GetProduct(article).SizesAvailable;
             }
 
             throw new ArgumentNullException();
@@ -53,27 +53,16 @@ namespace Shop.Core.Services
 
         public bool AddNewProduct(Product product)
         {
-            // if (CheckParameter(product))
-            // {
-            //     try
-            //     {
-            //         if (_mongoDatabase.GetDatabaseList<Product>().Result.All(p => p.Article != product.Article))
-            //         {
-            //             _mongoDatabase.AddInDatabase(product);
-            //             return _mongoDatabase.GetDatabaseList<Product>().Result.Any(p => p.Article == product.Article);
-            //         }
-            //         
-            //         throw new InvalidEnumArgumentException();
-            //     }
-            //     catch
-            //     {
-            //         var db = new MainDatabase();
-            //         db.AddInDatabase(product);
-            //         return db.GetDatabaseList<Product>().Result.Any(p=>p.Article == product.Article);
-            // }
-        // }
-            
-            throw new NotImplementedException();
+            if (CheckParameter(product))
+            {
+                _productDataProvider.AddProductInDatabase(product);
+                if (Products.Contains(product))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private bool CheckParameter(long param)
@@ -83,7 +72,7 @@ namespace Shop.Core.Services
 
         private bool CheckParameter(Product product)
         {
-            return string.IsNullOrEmpty(product.Title) && product.SizesAvailable.IsNullOrEmpty() &&
+            return string.IsNullOrEmpty(product.Title) &&
                    string.IsNullOrEmpty(product.Label) && CheckParameter(product.Article);
         }
     }
