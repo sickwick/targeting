@@ -1,12 +1,15 @@
 using System;
 using System.Linq;
-using FakeLibrary;
+using Autofac;
 using Microsoft.Extensions.Caching.Memory;
-using Shop.Database;
-using Shop.Database.Models;
+using Shop.Core;
+using Shop.Core.DataProviders;
+using Shop.Core.Models;
+using Shop.Core.Services;
+using Shop.Database.Extensions;
+using Shop.Database.Stubs;
 using Shop.Tests.Mocks;
 using Shop.WebAPI.Interfaces;
-using Shop.WebAPI.Services;
 using Xunit;
 
 namespace Shop.Tests.WebTests
@@ -19,7 +22,7 @@ namespace Shop.Tests.WebTests
 
         public ProductServiceTests()
         {
-            _productService = new ProductService(new ProductDataProvider(new MemoryCache(new MemoryCacheOptions())));
+            _productService = ContainerTestConfig.GetContainer().Resolve<IProductService>();
             _productsStub = new ProductsStub();
             _databaseMock = new DatabaseMock();
         }
