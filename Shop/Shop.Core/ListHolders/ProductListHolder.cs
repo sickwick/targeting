@@ -6,7 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Shop.Core.DataProviders;
 using Shop.Core.Interfaces.DataProviders;
 using Shop.Core.Models;
-using Shop.WebAPI.Interfaces;
 
 namespace Shop.Core.ListHolders
 {

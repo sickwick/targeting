@@ -2,8 +2,8 @@ using Autofac;
 using Microsoft.Extensions.Caching.Memory;
 using Shop.Core.DataProviders;
 using Shop.Core.Interfaces.DataProviders;
+using Shop.Core.Interfaces.Services;
 using Shop.Core.Services;
-using Shop.WebAPI.Interfaces;
 
 namespace Shop.Core
 {
