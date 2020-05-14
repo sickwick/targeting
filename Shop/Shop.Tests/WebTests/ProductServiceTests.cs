@@ -80,7 +80,7 @@ namespace Shop.Tests.WebTests
         {
             Assert.Equal(_productService.GetSizes(12345).SerializeObject(),
                 _productsStub.Products.FirstOrDefault(i => i.Article == 12345).SizesAvailable.SerializeObject());
-            Assert.True(_productService.GetSizes(12345).Any());
+            // Assert.True(_productService.GetSizes(12345).Any());
             Assert.NotEqual(_productService.GetSizes(12345).SerializeObject(),
                 _productsStub.Products.FirstOrDefault(i => i.Article == 12454).SizesAvailable.SerializeObject());
             for (long i = 1; i < 20000; i++)
