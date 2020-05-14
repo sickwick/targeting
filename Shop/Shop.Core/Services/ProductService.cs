@@ -41,11 +41,11 @@ namespace Shop.Core.Services
             throw new ArgumentException();
         }
 
-        public List<Sizes> GetSizes(long article)
+        public Sizes GetSizes(long article)
         {
             if (CheckParameter(article))
             {
-                return GetProduct(article).SizesAvailable.ToList();
+                return GetProduct(article).SizesAvailable;
             }
 
             throw new ArgumentNullException();
