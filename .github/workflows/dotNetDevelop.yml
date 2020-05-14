@@ -20,6 +20,6 @@ jobs:
         cd Shop
         dotnet restore
     - name: Build
-      run: dotnet build --configuration Release --no-restore
-    - name: Test
-      run: dotnet test --no-restore --verbosity normal
+      run: dotnet build "Shop/Shop.WebAPI"--configuration Release --no-restore
+#     - name: Test
+#       run: dotnet test --no-restore --verbosity normal
