@@ -21,11 +21,13 @@ jobs:
         cd Shop
         dotnet restore
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: |
+        cd Shop
+        dotnet build --configuration Release --no-restore
 #     - name: Test
 #       run: dotnet test --no-restore --verbosity normal
   
- build:
+ build-frontend:
     runs-on: ubuntu-latest
 
     strategy:
