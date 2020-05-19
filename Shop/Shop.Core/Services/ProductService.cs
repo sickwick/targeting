@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Autofac;
 using Shop.Core.Interfaces.DataProviders;
 using Shop.Core.Interfaces.Services;
 using Shop.Core.ListHolders;
@@ -15,10 +14,10 @@ namespace Shop.Core.Services
         private readonly IProductDataProvider _productDataProvider;
         private readonly List<Product> Products;
 
-        public ProductService(IProductDataProvider productDataProvider, IServiceProvider container)
+        public ProductService(IProductDataProvider productDataProvider)
         {
             _productDataProvider = productDataProvider;
-            Products = ProductListHolder.GetInstance(container).ProductList;
+            Products = ProductListHolder.GetInstance().ProductList;
         }
 
         public List<Product> GetAllProducts()
@@ -33,7 +32,7 @@ namespace Shop.Core.Services
 
         public Product GetProduct(long article)
         {
-            if (CheckParameter(article) && _productDataProvider.GetProducts().Any(p => p.Article == article))
+            if (CheckParameterIncorrect(article) && _productDataProvider.GetProducts().Any(p => p.Article == article))
             {
                 return _productDataProvider.GetProducts().FirstOrDefault(p => p.Article == article);
             }
@@ -43,7 +42,7 @@ namespace Shop.Core.Services
 
         public Sizes GetSizes(long article)
         {
-            if (CheckParameter(article))
+            if (CheckParameterIncorrect(article))
             {
                 return GetProduct(article).SizesAvailable;
             }
@@ -53,27 +52,28 @@ namespace Shop.Core.Services
 
         public bool AddNewProduct(Product product)
         {
-            if (CheckParameter(product))
+            if (!CheckParameterIncorrect(product))
             {
-                _productDataProvider.AddProductInDatabase(product);
-                if (Products.Contains(product))
-                {
-                    return true;
-                }
+                return _productDataProvider.AddProductInDatabase(product);
             }
-
-            return false;
+            
+            throw new ArgumentException();
         }
 
-        private bool CheckParameter(long param)
+        private bool CheckParameterIncorrect(long param)
         {
             return param > 0 && param != default && param < long.MaxValue;
         }
 
-        private bool CheckParameter(Product product)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns>True - when you has WRONG product argument, else false </returns>
+        private bool CheckParameterIncorrect(Product product)
         {
             return string.IsNullOrEmpty(product.Title) &&
-                   string.IsNullOrEmpty(product.Label) && CheckParameter(product.Article);
+                   string.IsNullOrEmpty(product.Label) && CheckParameterIncorrect(product.Article);
         }
     }
 }

@@ -13,6 +13,6 @@ namespace Shop.Database.Stubs
         public string Season { get; set; }
         public bool Gender { get; set; }
         public string Photo { get; set; }
-        public IEnumerable<SizesModel> SizesAvailable { get; set; }
+        public SizesModel SizesAvailable { get; set; }
     }
 }

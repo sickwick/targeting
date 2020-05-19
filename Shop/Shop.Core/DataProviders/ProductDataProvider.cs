@@ -20,46 +20,56 @@ namespace Shop.Core.DataProviders
         public ProductDataProvider(IMemoryCache memoryCache)
         {
             _cache = memoryCache;
-            _databaseBase = new MainDatabase();
-            _databaseBase = new MongoDatabase(_databaseBase,
+            _databaseBase = new MongoDatabase(new MainDatabase(),
                 new MongoDatabaseContext(Environment.GetEnvironmentVariable("DB_NAME"), "User"));
         }
 
         /// <summary>
-        /// Function check if db return correct answer
-        /// if true - return correct data and cache it
-        /// else - return data from fake db
+        /// Function try get data from db,
+        /// if request isn't the first, return data from cache
+        /// else do new request to db and return them
         /// </summary>
         /// <returns>Products list</returns>
         public List<Product> GetProducts()
         {
-            try
+            if (!_cache.TryGetValue(CacheName, out _products))
             {
-                // if (!_cache.TryGetValue(CacheName, out _products))
-                // {
-                //     _products = _databaseBase.GetDatabaseList<Product>().Result;
-                //     if (_products.IsNullOrEmpty() || _products.Any(i => i.Article == 0))
-                //     {
-                //         throw new NullReferenceException();
-                //     }
-                //     SetCache(_products, 1);
-                // }
                 _products = _databaseBase.GetDatabaseList<Product>().Result;
-                return _products;
-            }
-            catch (Exception)
-            {
-                return new MainDatabase().GetDatabaseList<Product>().Result;
-            }
-        }
-
-        public void AddProductInDatabase(Product product)
-        {
-            _databaseBase.AddInDatabase(product);
-            if (_cache.TryGetValue(CacheName, out _products) && !_products.Contains(product))
-            {
+                if (_products.IsNullOrEmpty() || _products.Any(i => i.Article == 0))
+                {
+                    throw new NullReferenceException();
+                }
                 SetCache(_products, 1);
             }
+                
+            return _products;
+        }
+        
+        /// <summary>
+        /// Function add new item in list and try to update cache
+        /// </summary>
+        /// <param name="product"></param>
+        public bool AddProductInDatabase(Product product)
+        {
+            if (_products.IsNullOrEmpty())
+            {
+                GetProducts();
+            }
+            else
+            {
+                if (!_products.Contains(product))
+                {
+                    _databaseBase.AddInDatabase(product);
+                    _products.Add(product);
+                    SetCache(_products, 1);
+                }
+                else
+                {
+                    throw new ArgumentException();
+                }
+            }
+
+            return _cache.TryGetValue(CacheName, out List<Product> newCache) && newCache.SequenceEqual(_products);
         }
 
         private void SetCache(List<Product> productList, int lifeTime)

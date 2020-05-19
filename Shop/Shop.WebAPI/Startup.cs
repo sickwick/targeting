@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Autofac;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,17 +26,14 @@ namespace Shop.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
             services.AddCors();
             services.AddMemoryCache();
             services.AddDistributedMemoryCache();
             
             // services.TryAdd(ServiceDescriptor.Singleton<IMemoryCache, MemoryCache>());  
-        }
-        
-        public void ConfigureContainer(ContainerBuilder builder)
-        {
-            builder.RegisterModule<AutofacModule>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
