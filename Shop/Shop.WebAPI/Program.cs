@@ -1,6 +1,7 @@
-using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Shop.Core;
 
 namespace Shop.WebAPI
 {
@@ -13,7 +14,7 @@ namespace Shop.WebAPI
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .ConfigureServices(services=>services.AddAutofac())
+                .ConfigureServices(services=>services.AddSingleton(new ContainerConfig(services)))
                 .UseKestrel()
                 .UseStartup<Startup>();
     }

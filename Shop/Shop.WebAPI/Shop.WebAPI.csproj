@@ -9,10 +9,5 @@
       <ProjectReference Include="..\Shop.Targeting\Shop.Targeting.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <PackageReference Include="Autofac" Version="5.1.4" />
-      <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="6.0.0" />
-    </ItemGroup>
-
 
 </Project>

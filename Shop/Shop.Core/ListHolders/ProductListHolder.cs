@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
-using Autofac;
 using Microsoft.Extensions.DependencyInjection;
 using Shop.Core.DataProviders;
 using Shop.Core.Interfaces.DataProviders;

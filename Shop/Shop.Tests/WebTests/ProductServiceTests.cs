@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
-using Autofac;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.DependencyInjection;
 using Shop.Core;
 using Shop.Core.DataProviders;
 using Shop.Core.Interfaces.DataProviders;
@@ -11,6 +11,7 @@ using Shop.Core.Services;
 using Shop.Database.Extensions;
 using Shop.Database.Stubs;
 using Shop.Tests.Mocks;
+using Shop.WebAPI;
 using Xunit;
 
 namespace Shop.Tests.WebTests
@@ -23,7 +24,7 @@ namespace Shop.Tests.WebTests
 
         public ProductServiceTests()
         {
-            //Add resolver for _productService
+            _productService = ProductServiceContainerConfig.GetContainer().GetService<IProductService>();
             _productsStub = new ProductsStub();
             _databaseMock = new DatabaseMock();
         }

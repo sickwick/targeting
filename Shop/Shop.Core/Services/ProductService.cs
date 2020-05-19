@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Autofac;
 using Shop.Core.Interfaces.DataProviders;
 using Shop.Core.Interfaces.Services;
 using Shop.Core.ListHolders;
@@ -41,11 +40,11 @@ namespace Shop.Core.Services
             throw new ArgumentException();
         }
 
-        public Sizes GetSizes(long article)
+        public List<Sizes> GetSizes(long article)
         {
             if (CheckParameter(article))
             {
-                return GetProduct(article).SizesAvailable;
+                return GetProduct(article).SizesAvailable.ToList();
             }
 
             throw new ArgumentNullException();

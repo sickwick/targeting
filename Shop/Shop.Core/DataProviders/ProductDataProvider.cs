@@ -20,8 +20,7 @@ namespace Shop.Core.DataProviders
         public ProductDataProvider(IMemoryCache memoryCache)
         {
             _cache = memoryCache;
-            _databaseBase = new MainDatabase();
-            _databaseBase = new MongoDatabase(_databaseBase,
+            _databaseBase = new MongoDatabase(new MainDatabase(),
                 new MongoDatabaseContext(Environment.GetEnvironmentVariable("DB_NAME"), "User"));
         }
 
@@ -33,24 +32,17 @@ namespace Shop.Core.DataProviders
         /// <returns>Products list</returns>
         public List<Product> GetProducts()
         {
-            try
+            if (!_cache.TryGetValue(CacheName, out _products))
             {
-                // if (!_cache.TryGetValue(CacheName, out _products))
-                // {
-                //     _products = _databaseBase.GetDatabaseList<Product>().Result;
-                //     if (_products.IsNullOrEmpty() || _products.Any(i => i.Article == 0))
-                //     {
-                //         throw new NullReferenceException();
-                //     }
-                //     SetCache(_products, 1);
-                // }
                 _products = _databaseBase.GetDatabaseList<Product>().Result;
-                return _products;
+                if (_products.IsNullOrEmpty() || _products.Any(i => i.Article == 0))
+                {
+                    throw new NullReferenceException();
+                }
+                SetCache(_products, 1);
             }
-            catch (Exception)
-            {
-                return new MainDatabase().GetDatabaseList<Product>().Result;
-            }
+                
+            return _products;
         }
 
         public void AddProductInDatabase(Product product)
