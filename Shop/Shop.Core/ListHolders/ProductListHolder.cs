@@ -15,11 +15,10 @@ namespace Shop.Core.ListHolders
 
         public List<Product> ProductList;
         private IProductDataProvider _productDataProvider;
-        private static IServiceProvider _provider;
 
         private ProductListHolder()
         {
-            _productDataProvider = _provider.GetService<IProductDataProvider>();
+            _productDataProvider = ContainerConfig.ServiceProvider.GetService<IProductDataProvider>();
             ProductList = _productDataProvider.GetProducts();
         }
 
@@ -31,9 +30,8 @@ namespace Shop.Core.ListHolders
             }
         }
         
-        public static ProductListHolder GetInstance(IServiceProvider provider)
+        public static ProductListHolder GetInstance()
         {
-            _provider = provider;
             return _singleInstance.Value;
         }
     }

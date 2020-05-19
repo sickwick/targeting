@@ -1,4 +1,7 @@
+using System;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Shop.Core.DataProviders;
 using Shop.Core.Interfaces.DataProviders;
 using Shop.Core.Interfaces.Services;
@@ -8,10 +11,16 @@ namespace Shop.Core
 {
     public class ContainerConfig
     {
-        public ContainerConfig(IServiceCollection provider)
+        public static IServiceProvider ServiceProvider { get; private set; }
+
+        public ContainerConfig(IServiceCollection service)
         {
-            provider.AddTransient<IProductService, ProductService>();
-            provider.AddTransient<IProductDataProvider, ProductDataProvider>();
+            service.TryAdd(ServiceDescriptor.Singleton<IMemoryCache, MemoryCache>());
+            
+            service.AddTransient<IProductService, ProductService>();
+            service.AddTransient<IProductDataProvider, ProductDataProvider>();
+
+            ServiceProvider = service.BuildServiceProvider();
         }
     }
 }

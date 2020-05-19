@@ -25,9 +25,9 @@ namespace Shop.Core.DataProviders
         }
 
         /// <summary>
-        /// Function check if db return correct answer
-        /// if true - return correct data and cache it
-        /// else - return data from fake db
+        /// Function try get data from db,
+        /// if request isn't the first, return data from cache
+        /// else do new request to db and return them
         /// </summary>
         /// <returns>Products list</returns>
         public List<Product> GetProducts()
@@ -44,14 +44,32 @@ namespace Shop.Core.DataProviders
                 
             return _products;
         }
-
-        public void AddProductInDatabase(Product product)
+        
+        /// <summary>
+        /// Function add new item in list and try to update cache
+        /// </summary>
+        /// <param name="product"></param>
+        public bool AddProductInDatabase(Product product)
         {
-            _databaseBase.AddInDatabase(product);
-            if (_cache.TryGetValue(CacheName, out _products) && !_products.Contains(product))
+            if (_products.IsNullOrEmpty())
             {
-                SetCache(_products, 1);
+                GetProducts();
             }
+            else
+            {
+                if (!_products.Contains(product))
+                {
+                    _databaseBase.AddInDatabase(product);
+                    _products.Add(product);
+                    SetCache(_products, 1);
+                }
+                else
+                {
+                    throw new ArgumentException();
+                }
+            }
+
+            return _cache.TryGetValue(CacheName, out List<Product> newCache) && newCache.SequenceEqual(_products);
         }
 
         private void SetCache(List<Product> productList, int lifeTime)
