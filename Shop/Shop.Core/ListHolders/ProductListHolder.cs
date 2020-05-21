@@ -19,7 +19,7 @@ namespace Shop.Core.ListHolders
         private ProductListHolder()
         {
             _productDataProvider = ContainerConfig.ServiceProvider.GetService<IProductDataProvider>();
-            ProductList = _productDataProvider.GetProducts();
+            ProductList = GetProductList();
         }
 
         static ProductListHolder()
@@ -28,6 +28,16 @@ namespace Shop.Core.ListHolders
             {
                 _singleInstance = new Lazy<ProductListHolder>();
             }
+        }
+
+        public List<Product> GetProductList()
+        {
+            return _productDataProvider.GetProducts();
+        }
+        
+        public void UpdateProductList()
+        {
+            ProductList = GetProductList();
         }
         
         public static ProductListHolder GetInstance()

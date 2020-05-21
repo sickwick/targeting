@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.Caching.Memory;
 using Shop.Core.Interfaces.DataProviders;
+using Shop.Core.ListHolders;
 using Shop.Core.Models;
 using Shop.Database;
 using Shop.Database.Extensions;
@@ -53,20 +54,19 @@ namespace Shop.Core.DataProviders
         {
             if (_products.IsNullOrEmpty())
             {
-                GetProducts();
+                _products = GetProducts();
+            }
+            
+            if (!_products.Contains(product))
+            {
+                _databaseBase.AddInDatabase(product);
+                _products.Add(product);
+                SetCache(_products, 1);
+                ProductListHolder.GetInstance().UpdateProductList();
             }
             else
             {
-                if (!_products.Contains(product))
-                {
-                    _databaseBase.AddInDatabase(product);
-                    _products.Add(product);
-                    SetCache(_products, 1);
-                }
-                else
-                {
-                    throw new ArgumentException();
-                }
+                throw new ArgumentException();
             }
 
             return _cache.TryGetValue(CacheName, out List<Product> newCache) && newCache.SequenceEqual(_products);
@@ -76,7 +76,7 @@ namespace Shop.Core.DataProviders
         {
             _cache.Set(CacheName, productList, new MemoryCacheEntryOptions
             {
-                AbsoluteExpirationRelativeToNow = TimeSpan.FromDays(lifeTime)
+                AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(lifeTime)
             });
         }
     }
