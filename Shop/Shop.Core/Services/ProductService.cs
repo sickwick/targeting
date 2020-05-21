@@ -12,19 +12,19 @@ namespace Shop.Core.Services
     public class ProductService : IProductService
     {
         private readonly IProductDataProvider _productDataProvider;
-        private readonly List<Product> Products;
+        private readonly List<Product> _products;
 
         public ProductService(IProductDataProvider productDataProvider)
         {
             _productDataProvider = productDataProvider;
-            Products = ProductListHolder.GetInstance().ProductList;
+            _products = ProductListHolder.GetInstance().ProductList;
         }
 
         public List<Product> GetAllProducts()
         {
-            if (!Products.IsNullOrEmpty())
+            if (!_products.IsNullOrEmpty())
             {
-                return Products;
+                return _products;
             }
 
             throw new NullReferenceException();
@@ -32,9 +32,9 @@ namespace Shop.Core.Services
 
         public Product GetProduct(long article)
         {
-            if (CheckParameterIncorrect(article) && Products.Any(p => p.Article == article))
+            if (CheckParameterIncorrect(article) && _products.Any(p => p.Article == article))
             {
-                return Products.FirstOrDefault(p => p.Article == article);
+                return _products.FirstOrDefault(p => p.Article == article);
             }
 
             throw new ArgumentException();
