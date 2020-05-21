@@ -1,4 +1,18 @@
 <div class="container-product">
-  <div class="photos"></div>
-  <div class="info"></div>
+  <div class="photos">
+    <img class="main-img" src="{{product.photo}}" alt="">
+  </div>
+  <div class="info">
+    <p *ngIf="product.gender">Мужская обувь</p>
+    <p *ngIf="!product.gender">Женская обувь</p>
+    <h1>{{product.label}} {{product.title}}</h1>
+    <p>{{product.category}}</p>
+    <p>{{product.season}}</p>
+    <app-size-block
+      [sizesList]="product.sizesAvailable"></app-size-block>
+    <p>{{product.sizesAvailable}}</p>
+  </div>
+  <div class="offer">
+<!--    place for offer slider component-->
+  </div>
 </div>

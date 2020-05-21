@@ -1,20 +1,32 @@
 .container-product {
   display: grid;
-  grid-template-columns: 46vw 42vw;
-  grid-template-rows: 90vh;
+  grid-template-columns: 65vw 26vw;
+  grid-template-rows: 80vh 16vh;
   grid-row-gap: 2vh;
-  grid-column-gap: 2vh;
-  margin-left: 4vw;
+  grid-column-gap: 4vw;
+  justify-content: center;
 
-  grid-template-areas: "photos info";
+  grid-template-areas:
+    "photos info"
+    "offer offer";
 
   .photos {
     grid-area: photos;
 
+    .main-img {
+      width: auto;
+      height: auto;
+      justify-content: center;
+    }
   }
 
   .info {
     grid-area: info;
     background-color: pink;
+  }
+
+  .offer {
+    grid-area: offer;
+    background-color: aqua;
   }
 }
