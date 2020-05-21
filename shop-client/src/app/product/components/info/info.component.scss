@@ -12,11 +12,10 @@
 
   .photos {
     grid-area: photos;
-
+    justify-content: center;
     .main-img {
-      width: auto;
-      height: auto;
-      justify-content: center;
+      width: 70%;
+      height: 80%;
     }
   }
 

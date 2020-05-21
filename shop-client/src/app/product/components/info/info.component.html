@@ -8,6 +8,7 @@
     <h1>{{product.label}} {{product.title}}</h1>
     <p>{{product.category}}</p>
     <p>{{product.season}}</p>
+    <button mat-flat-button color="accent" [ngStyle]="{width: '16vw', height: '6vh', justifyContent: 'center', borderRadius: '50px'}">Accent</button>
     <app-size-block
       [sizesList]="product.sizesAvailable"></app-size-block>
     <p>{{product.sizesAvailable}}</p>
