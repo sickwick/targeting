@@ -22,9 +22,9 @@ namespace Shop.Core.Services
 
         public List<Product> GetAllProducts()
         {
-            if (!_productDataProvider.GetProducts().IsNullOrEmpty())
+            if (!Products.IsNullOrEmpty())
             {
-                return _productDataProvider.GetProducts();
+                return Products;
             }
 
             throw new NullReferenceException();
@@ -32,9 +32,9 @@ namespace Shop.Core.Services
 
         public Product GetProduct(long article)
         {
-            if (CheckParameterIncorrect(article) && _productDataProvider.GetProducts().Any(p => p.Article == article))
+            if (CheckParameterIncorrect(article) && Products.Any(p => p.Article == article))
             {
-                return _productDataProvider.GetProducts().FirstOrDefault(p => p.Article == article);
+                return Products.FirstOrDefault(p => p.Article == article);
             }
 
             throw new ArgumentException();
