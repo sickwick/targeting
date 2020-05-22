@@ -8,6 +8,6 @@ export interface IProduct {
   label: string;
   season?: string;
   gender: boolean;
-  photo: string;
-  sizesAvailable: ISizes[];
+  photo: string[];
+  sizesAvailable: ISizes;
 }

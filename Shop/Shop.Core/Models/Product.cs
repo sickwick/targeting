@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
@@ -16,7 +17,7 @@ namespace Shop.Core.Models
         public string Label { get; set; }
         public string Season { get; set; }
         public bool Gender { get; set; }
-        public string Photo { get; set; }
+        public List<string> Photo { get; set; }
         public Sizes SizesAvailable { get; set; }
     }
 }
