@@ -9,5 +9,5 @@ export interface IProduct {
   season?: string;
   gender: boolean;
   photo: string;
-  sizesAvailable: ISizes[];
+  sizesAvailable: ISizes;
 }
