@@ -3,8 +3,9 @@ import { CommonModule } from '@angular/common';
 import { InfoComponent } from './components/info/info.component';
 import {SharedModule} from '../shared/shared.module';
 import {MatCardModule} from '@angular/material/card';
-import {MatChipsModule} from '@angular/material/chips';
 import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+
 
 
 
@@ -14,8 +15,8 @@ import {MatButtonModule} from '@angular/material/button';
     CommonModule,
     SharedModule,
     MatCardModule,
-    MatChipsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule
   ],
   exports: [InfoComponent]
 })

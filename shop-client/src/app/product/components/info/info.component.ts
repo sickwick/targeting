@@ -1,6 +1,5 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {IProduct} from '../../../models/iproduct';
-import {HttpClient} from '@angular/common/http';
 import {ActivatedRoute} from '@angular/router';
 import {UtilityService} from '../../../core/utility.service';
 import {MatButtonModule} from '@angular/material/button';

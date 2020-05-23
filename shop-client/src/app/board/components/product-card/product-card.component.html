@@ -1,5 +1,5 @@
 <a [routerLink]="['/product/'+ product.article]">
-  <img class="images" src="{{product.photo}}" alt="  ">
+  <img class="images" src="{{product.photo[0]}}" alt="  ">
   <div class="footer">
     <div class="about">
       <p class="about">{{product.label}} {{product.title}}</p>

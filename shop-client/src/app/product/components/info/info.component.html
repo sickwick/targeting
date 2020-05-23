@@ -1,19 +1,34 @@
 <div class="container-product">
-  <div class="photos">
-    <img class="main-img" src="{{product.photo}}" alt="">
+  <div  class="photos">
+    <div *ngFor="let phot of product.photo">
+      <img class="img" src="{{phot}}" alt="">
+    </div>
   </div>
   <div class="info">
-    <p *ngIf="product.gender">Мужская обувь</p>
-    <p *ngIf="!product.gender">Женская обувь</p>
-    <h1>{{product.label}} {{product.title}}</h1>
-    <p>{{product.category}}</p>
-    <p>{{product.season}}</p>
-    <button mat-flat-button color="accent" [ngStyle]="{width: '16vw', height: '6vh', justifyContent: 'center', borderRadius: '50px'}">Accent</button>
-    <app-size-block
-      [sizesList]="product.sizesAvailable"></app-size-block>
-    <p>{{product.sizesAvailable}}</p>
-  </div>
-  <div class="offer">
-<!--    place for offer slider component-->
+    <div class="info-body">
+      <div class="main-info">
+        <div class="name">
+          <h2 *ngIf="product.gender">Мужская обувь</h2>
+          <h2 *ngIf="!product.gender">Женская обувь</h2>
+          <h1>{{product.label}} {{product.title}}</h1>
+        </div>
+        <div class="price">
+          <p>8 290 ₽</p>
+        </div>
+      </div>
+      <div>
+        <app-size-block
+          [sizesList]="product.sizesAvailable"></app-size-block>
+      </div>
+      <div class="button-block">
+        <button mat-flat-button color="accent" class="button">Добавить в корзину</button>
+        <button mat-fab color="accent" class="button" aria-label="Example icon button with a bookmark icon">
+          <p>Избранное&nbsp;&nbsp;<mat-icon>favorite</mat-icon></p>
+        </button>
+      </div>
+      <p>{{product.category}}</p>
+      <p>{{product.season}}</p>
+    </div>
+
   </div>
 </div>
