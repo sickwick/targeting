@@ -7,6 +7,7 @@ import {BoardModule} from './board/board.module';
 import {ProductModule} from './product/product.module';
 import {HttpClientModule} from '@angular/common/http';
 import {environment} from '../environments/environment';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import {environment} from '../environments/environment';
     BoardModule,
     ProductModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [
     {provide: 'BASE_API_URL', useValue: environment.apiUrl}],
