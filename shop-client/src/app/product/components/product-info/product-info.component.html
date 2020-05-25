@@ -1,0 +1,24 @@
+<div class="info-body">
+  <div class="main-info">
+    <div class="name">
+      <h2 *ngIf="product.gender">Мужская обувь</h2>
+      <h2 *ngIf="!product.gender">Женская обувь</h2>
+      <h1>{{product.label}} {{product.title}}</h1>
+    </div>
+    <div class="price">
+      <p>{{product.price| currency:'₽'}}</p>
+    </div>
+  </div>
+  <div>
+    <!--        <app-size-block-->
+    <!--          [sizesList]="product.sizesAvailable"></app-size-block>-->
+  </div>
+  <div class="button-block">
+    <app-big-button [button]="addToCard"></app-big-button>
+    <app-big-button [button]="favorite"></app-big-button>
+  </div>
+  <p>{{product.category}}</p>
+  <p>{{product.season}}</p>
+  <p>{{product.aboutInfo}}</p>
+
+</div>
