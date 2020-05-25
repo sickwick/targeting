@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {IProduct} from '../../../models/iproduct';
 import {ActivatedRoute} from '@angular/router';
 import {UtilityService} from '../../../core/utility.service';
-import {MatButtonModule} from '@angular/material/button';
+import {IButton} from '../../../models/ibutton';
 
 @Component({
   selector: 'app-info',
@@ -13,6 +13,17 @@ export class InfoComponent implements OnInit {
 
   public product: IProduct;
   private article: number;
+  public favorite: IButton = {
+    backgroundColor: '#ccc',
+    text: 'Избранное',
+    icon: 'favorite'
+  };
+
+  public addToCard: IButton = {
+    backgroundColor: 'black',
+    color: '#fff',
+    text: 'Добавить в корзину',
+  };
 
   constructor(
     private utility: UtilityService,

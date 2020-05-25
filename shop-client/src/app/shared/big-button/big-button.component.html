@@ -1,0 +1,6 @@
+<button mat-flat-button class="button" [ngStyle]="
+{
+backgroundColor: button.backgroundColor,
+color: button.color}">
+  {{button.text}}&nbsp;&nbsp;<mat-icon *ngIf="button.icon">{{button.icon}}</mat-icon>
+</button>
