@@ -16,7 +16,7 @@ import {MatIconModule} from '@angular/material/icon';
     SharedModule,
     MatCardModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
   ],
   exports: [InfoComponent]
 })

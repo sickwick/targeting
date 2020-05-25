@@ -17,14 +17,12 @@
         </div>
       </div>
       <div>
-        <app-size-block
-          [sizesList]="product.sizesAvailable"></app-size-block>
+<!--        <app-size-block-->
+<!--          [sizesList]="product.sizesAvailable"></app-size-block>-->
       </div>
       <div class="button-block">
-        <button mat-flat-button color="accent" class="button">Добавить в корзину</button>
-        <button mat-fab color="accent" class="button" aria-label="Example icon button with a bookmark icon">
-          <p>Избранное&nbsp;&nbsp;<mat-icon>favorite</mat-icon></p>
-        </button>
+        <app-big-button [button]="addToCard"></app-big-button>
+        <app-big-button [button]="favorite"></app-big-button>
       </div>
       <p>{{product.category}}</p>
       <p>{{product.season}}</p>
