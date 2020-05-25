@@ -9,5 +9,7 @@ export interface IProduct {
   season?: string;
   gender: boolean;
   photo: string[];
+  aboutInfo?: string;
+  price?: number;
   sizesAvailable: ISizes;
 }
