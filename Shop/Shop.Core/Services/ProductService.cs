@@ -35,9 +35,9 @@ namespace Shop.Core.Services
             throw new ArgumentException();
         }
 
-        public Sizes GetSizes(long article)
+        public List<Sizes> GetSizes(long article)
         {
-            if (CheckParameterIncorrect(article)) return GetProduct(article).SizesAvailable;
+            if (CheckParameterIncorrect(article)) return GetProduct(article).SizesAvailable.ToList();
 
             throw new ArgumentNullException();
         }

@@ -23,7 +23,8 @@ jobs:
     - name: Build
       run: |
         cd Shop
-        dotnet build --configuration Release --no-incremental /WarnAsError --no-restore
+        dotnet build --configuration Release --no-restore
+#         --no-incremental /WarnAsError
 #     - name: Test
 #       run: dotnet test --no-restore --verbosity normal
   

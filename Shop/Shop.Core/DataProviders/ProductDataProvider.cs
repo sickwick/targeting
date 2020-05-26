@@ -22,7 +22,7 @@ namespace Shop.Core.DataProviders
         {
             _cache = memoryCache;
             _databaseBase = new MongoDatabase(new MainDatabase(),
-                new MongoDatabaseContext(Environment.GetEnvironmentVariable("DB_NAME"), "User"));
+                new MongoDatabaseContext(Environment.GetEnvironmentVariable("DB_NAME"), "Shop"));
         }
 
         /// <summary>
