@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Shop.Database.Stubs.Models
 {
     public class ProductModel
@@ -11,6 +13,6 @@ namespace Shop.Database.Stubs.Models
         public string Season { get; set; }
         public bool Gender { get; set; }
         public string Photo { get; set; }
-        public SizesModel SizesAvailable { get; set; }
+        public IEnumerable<SizesModel> SizesAvailable { get; set; }
     }
 }
