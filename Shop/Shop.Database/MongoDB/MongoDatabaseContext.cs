@@ -5,14 +5,15 @@ namespace Shop.Database.MongoDB
 {
     public class MongoDatabaseContext
     {
-        private string _databaseName;
         private string _collectionName;
+        private string _databaseName;
 
         public MongoDatabaseContext(string databaseName, string collectionName)
         {
             _databaseName = databaseName;
             _collectionName = collectionName;
         }
+
         private IMongoDatabase ConnectToDatabase()
         {
             var login = Environment.GetEnvironmentVariable("DB_LOGIN");
@@ -22,7 +23,7 @@ namespace Shop.Database.MongoDB
             var database = client.GetDatabase("Shop");
             return database;
         }
-        
+
         public IMongoCollection<TModel> GetCollection<TModel>()
         {
             return ConnectToDatabase().GetCollection<TModel>("Products");

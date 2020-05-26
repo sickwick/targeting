@@ -11,16 +11,16 @@ namespace Shop.Core
 {
     public class ContainerConfig
     {
-        public static IServiceProvider ServiceProvider { get; private set; }
-
         public ContainerConfig(IServiceCollection service)
         {
             service.TryAdd(ServiceDescriptor.Singleton<IMemoryCache, MemoryCache>());
-            
+
             service.AddTransient<IProductService, ProductService>();
             service.AddTransient<IProductDataProvider, ProductDataProvider>();
 
             ServiceProvider = service.BuildServiceProvider();
         }
+
+        public static IServiceProvider ServiceProvider { get; private set; }
     }
 }

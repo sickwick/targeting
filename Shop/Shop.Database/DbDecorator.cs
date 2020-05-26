@@ -1,6 +1,6 @@
 namespace Shop.Database
 {
-    public abstract class DbDecorator: DatabaseBase
+    public abstract class DbDecorator : DatabaseBase
     {
         protected DatabaseBase _databaseBase;
 
@@ -8,6 +8,5 @@ namespace Shop.Database
         {
             _databaseBase = databaseBase;
         }
-
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
@@ -10,6 +9,7 @@ namespace Shop.Core.Models
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
+
         public long Article { get; set; }
         public string About { get; set; }
         public string Category { get; set; }

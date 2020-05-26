@@ -22,10 +22,7 @@ namespace Shop.Core.Services
 
         public List<Product> GetAllProducts()
         {
-            if (!_products.IsNullOrEmpty())
-            {
-                return _products;
-            }
+            if (!_products.IsNullOrEmpty()) return _products;
 
             throw new NullReferenceException();
         }
@@ -33,30 +30,22 @@ namespace Shop.Core.Services
         public Product GetProduct(long article)
         {
             if (CheckParameterIncorrect(article) && _products.Any(p => p.Article == article))
-            {
                 return _products.FirstOrDefault(p => p.Article == article);
-            }
 
             throw new ArgumentException();
         }
 
         public Sizes GetSizes(long article)
         {
-            if (CheckParameterIncorrect(article))
-            {
-                return GetProduct(article).SizesAvailable;
-            }
+            if (CheckParameterIncorrect(article)) return GetProduct(article).SizesAvailable;
 
             throw new ArgumentNullException();
         }
 
         public bool AddNewProduct(Product product)
         {
-            if (!CheckParameterIncorrect(product))
-            {
-                return _productDataProvider.AddProductInDatabase(product);
-            }
-            
+            if (!CheckParameterIncorrect(product)) return _productDataProvider.AddProductInDatabase(product);
+
             throw new ArgumentException();
         }
 
@@ -66,7 +55,6 @@ namespace Shop.Core.Services
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="product"></param>
         /// <returns>True - when you has WRONG product argument, else false </returns>

@@ -1,4 +1,4 @@
-namespace Shop.Database.Stubs
+namespace Shop.Database.Stubs.Models
 {
     public class SizesModel
     {
