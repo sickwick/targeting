@@ -18,7 +18,7 @@ namespace Shop.Core.Models
         public string Season { get; set; }
         public bool Gender { get; set; }
         public List<string> Photo { get; set; }
-        public Sizes SizesAvailable { get; set; }
+        public List<Sizes> SizesAvailable { get; set; }
         public double? Price { get; set; }
     }
 }
