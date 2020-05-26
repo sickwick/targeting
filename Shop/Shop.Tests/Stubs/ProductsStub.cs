@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using Shop.Database.Stubs.Models;
 
-namespace Shop.Database.Stubs
+namespace Shop.Tests.Stubs
 {
     public class ProductsStub
     {
-        public readonly List<ProductModel> Products = new List<ProductModel>
+        internal readonly List<ProductModel> Products = new List<ProductModel>
         {
             new ProductModel
             {

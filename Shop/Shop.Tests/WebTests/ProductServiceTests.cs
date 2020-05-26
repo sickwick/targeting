@@ -6,6 +6,7 @@ using Shop.Core.Models;
 using Shop.Database.Extensions;
 using Shop.Database.Stubs;
 using Shop.Tests.Mocks;
+using Shop.Tests.Stubs;
 using Xunit;
 
 namespace Shop.Tests.WebTests
