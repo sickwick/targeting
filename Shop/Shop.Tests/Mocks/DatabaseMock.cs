@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Shop.Database;
@@ -13,17 +14,17 @@ namespace Shop.Tests.Mocks
 
         public override void AddInDatabase<TModel>(TModel model)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public override void ChangeModelInDatabase<TModel>(TModel model, TModel newModel)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public override void DeleteModelFromDatabase<TModel>(TModel model)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

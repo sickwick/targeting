@@ -7,14 +7,15 @@ namespace Shop.WebAPI.Controllers
 {
     [ApiController]
     [Route("api/products")]
-    public class ProductsController: ControllerBase
+    public class ProductsController : ControllerBase
     {
         private readonly IProductService _productService;
-        
+
         public ProductsController(IProductService productService)
         {
             _productService = productService;
         }
+
         [HttpGet]
         public IActionResult GetAllProducts()
         {
@@ -22,7 +23,7 @@ namespace Shop.WebAPI.Controllers
             {
                 return Ok(_productService.GetAllProducts());
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -63,7 +64,7 @@ namespace Shop.WebAPI.Controllers
             {
                 return Ok(_productService.AddNewProduct(product));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex);
             }

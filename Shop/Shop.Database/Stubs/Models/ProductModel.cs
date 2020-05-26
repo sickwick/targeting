@@ -1,6 +1,4 @@
-using System.Collections.Generic;
-
-namespace Shop.Database.Stubs
+namespace Shop.Database.Stubs.Models
 {
     public class ProductModel
     {

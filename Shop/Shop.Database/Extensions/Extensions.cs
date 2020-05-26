@@ -8,7 +8,7 @@ namespace Shop.Database.Extensions
     public static class Extensions
     {
         /// <summary>
-        /// Convert any type to json string
+        ///     Convert any type to json string
         /// </summary>
         /// <param name="model"></param>
         /// <typeparam name="TModel"></typeparam>
@@ -17,9 +17,9 @@ namespace Shop.Database.Extensions
         {
             return JsonConvert.SerializeObject(model);
         }
-        
+
         /// <summary>
-        /// Convert to any type from json string
+        ///     Convert to any type from json string
         /// </summary>
         /// <param name="jsonString"></param>
         /// <typeparam name="TModel"></typeparam>
@@ -28,7 +28,7 @@ namespace Shop.Database.Extensions
         {
             return JsonConvert.DeserializeObject<TModel>(jsonString) ?? throw new NullReferenceException();
         }
-        
+
         /// <summary>
         ///     Check if your enumerable null or not
         /// </summary>
@@ -37,17 +37,11 @@ namespace Shop.Database.Extensions
         /// <returns> True if your enumerable is empty</returns>
         public static bool IsNullOrEmpty<T>(this IEnumerable<T> enumerable)
         {
-            if (enumerable == null)
-            {
-                return true;
-            }
-           
+            if (enumerable == null) return true;
+
             var collection = enumerable as ICollection<T>;
-            if (collection != null)
-            {
-                return collection.Count < 1;
-            }
-            return !enumerable.Any(); 
+            if (collection != null) return collection.Count < 1;
+            return !enumerable.Any();
         }
     }
 }

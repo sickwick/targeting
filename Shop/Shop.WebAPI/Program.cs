@@ -12,10 +12,12 @@ namespace Shop.WebAPI
             CreateWebHostBuilder(args).Build().Run();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .ConfigureServices(services=>services.AddSingleton(new ContainerConfig(services)))
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args)
+        {
+            return WebHost.CreateDefaultBuilder(args)
+                .ConfigureServices(services => services.AddSingleton(new ContainerConfig(services)))
                 .UseKestrel()
                 .UseStartup<Startup>();
+        }
     }
 }
