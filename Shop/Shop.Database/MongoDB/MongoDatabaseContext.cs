@@ -5,8 +5,8 @@ namespace Shop.Database.MongoDB
 {
     public class MongoDatabaseContext
     {
-        private string _collectionName;
-        private string _databaseName;
+        private readonly string _collectionName;
+        private readonly string _databaseName;
 
         public MongoDatabaseContext(string databaseName, string collectionName)
         {
@@ -19,8 +19,8 @@ namespace Shop.Database.MongoDB
             var login = Environment.GetEnvironmentVariable("DB_LOGIN");
             var password = Environment.GetEnvironmentVariable("DB_PASSWORD");
             var client = new MongoClient(
-                $"mongodb+srv://{login}:{password}@helper-dlcu6.azure.mongodb.net/test?retryWrites=true&w=majority");
-            var database = client.GetDatabase("Shop");
+                $"mongodb+srv://{login}:{password}@{_databaseName}-dlcu6.azure.mongodb.net/test?retryWrites=true&w=majority");
+            var database = client.GetDatabase(_collectionName);
             return database;
         }
 
