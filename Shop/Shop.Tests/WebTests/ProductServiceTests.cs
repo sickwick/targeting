@@ -4,7 +4,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Shop.Core.Interfaces.Services;
 using Shop.Core.Models;
 using Shop.Database.Extensions;
-using Shop.Database.Stubs;
 using Shop.Tests.Mocks;
 using Shop.Tests.Stubs;
 using Xunit;
