@@ -5,7 +5,7 @@ namespace Shop.Database.Stubs
 {
     public class ProductsStub
     {
-        public List<ProductModel> Products = new List<ProductModel>
+        public readonly List<ProductModel> Products = new List<ProductModel>
         {
             new ProductModel
             {
