@@ -3,5 +3,12 @@
         <Name Resource="HelloWorldRules_Name" />
         <Description Resource="HelloWorldRules_Description" />
     </Localization>
-    
+    <Rules AnalyzerId="Microsoft.CodeQuality.Analyzers" RuleNamespace="Microsoft.CodeQuality.Analyzers">
+        <Rule Id="CA1802" Action="Error" />
+        <Rule Id="CA1814" Action="Info" />
+        <Rule Id="CA1823" Action="None" />
+        <Rule Id="CA2217" Action="Warning" />
+        <Rule Id="CA1822" Action="None" />
+        <Rule Id="CA1062" Action="Error"/>
+    </Rules>
 </RuleSet>
