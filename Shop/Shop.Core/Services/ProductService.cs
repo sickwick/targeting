@@ -5,7 +5,7 @@ using Shop.Core.Interfaces.DataProviders;
 using Shop.Core.Interfaces.Services;
 using Shop.Core.ListHolders;
 using Shop.Core.Models;
-using Shop.Database.Extensions;
+using Shop.Storage.Extensions;
 
 namespace Shop.Core.Services
 {
@@ -46,7 +46,7 @@ namespace Shop.Core.Services
         {
             if (!CheckParameterIncorrect(product)) return _productDataProvider.AddProductInDatabase(product);
 
-            throw new ArgumentException();
+            throw new ArgumentNullException();
         }
 
         private bool CheckParameterIncorrect(long param)

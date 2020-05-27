@@ -4,6 +4,9 @@
         <TargetFramework>netcoreapp3.1</TargetFramework>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    </PropertyGroup>
+
     <ItemGroup>
       <ProjectReference Include="..\Shop.Core\Shop.Core.csproj" />
       <ProjectReference Include="..\Shop.Targeting\Shop.Targeting.csproj" />

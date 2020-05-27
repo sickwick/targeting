@@ -1,0 +1,7 @@
+<RuleSet Name="Rules for Hello World project" Description="These rules focus on critical issues for the Hello World app." ToolsVersion="10.0">
+    <Localization ResourceAssembly="Microsoft.VisualStudio.CodeAnalysis.RuleSets.Strings.dll" ResourceBaseName="Microsoft.VisualStudio.CodeAnalysis.RuleSets.Strings.Localized">
+        <Name Resource="HelloWorldRules_Name" />
+        <Description Resource="HelloWorldRules_Description" />
+    </Localization>
+    
+</RuleSet>
