@@ -6,7 +6,7 @@ using Shop.Core.Interfaces.DataProviders;
 using Shop.Core.ListHolders;
 using Shop.Core.Models;
 using Shop.Database;
-using Shop.Database.Extensions;
+using Shop.Storage.Extensions;
 using Shop.Database.MongoDB;
 
 namespace Shop.Core.DataProviders

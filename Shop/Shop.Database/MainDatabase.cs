@@ -1,24 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Shop.Database.Stubs;
 
 namespace Shop.Database
 {
     public class MainDatabase : DatabaseBase
     {
-        private readonly ProductsStub _productsStub;
-
-        public MainDatabase()
-        {
-            _productsStub = new ProductsStub();
-        }
-
         public override Task<List<TModel>> GetDatabaseList<TModel>()
         {
-            return Task.FromResult(
-                JsonConvert.DeserializeObject<List<TModel>>(JsonConvert.SerializeObject(_productsStub.Products)));
+            throw new NotImplementedException();
         }
 
         public override void AddInDatabase<TModel>(TModel model)

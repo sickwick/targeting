@@ -23,7 +23,7 @@ namespace Shop.WebAPI.Controllers
             {
                 return Ok(_productService.GetAllProducts());
             }
-            catch (Exception ex)
+            catch (ArgumentNullException ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -33,11 +33,12 @@ namespace Shop.WebAPI.Controllers
         [Route("product")]
         public IActionResult GetProduct([FromQuery] Product product)
         {
+            if (product == null) throw new ArgumentNullException(nameof(product));
             try
             {
                 return Ok(_productService.GetProduct(product.Article));
             }
-            catch (Exception ex)
+            catch (ArgumentNullException ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -47,11 +48,12 @@ namespace Shop.WebAPI.Controllers
         [Route("size")]
         public IActionResult GetSizes([FromQuery] Product product)
         {
+            if (product == null) throw new ArgumentNullException(nameof(product));
             try
             {
                 return Ok(_productService.GetSizes(product.Article));
             }
-            catch (Exception ex)
+            catch (ArgumentNullException ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -60,11 +62,13 @@ namespace Shop.WebAPI.Controllers
         [HttpPost]
         public IActionResult AddProduct(Product product)
         {
+            if (product == null) throw new ArgumentNullException(nameof(product));
+            
             try
             {
                 return Ok(_productService.AddNewProduct(product));
             }
-            catch (Exception ex)
+            catch (ArgumentNullException ex)
             {
                 return BadRequest(ex);
             }

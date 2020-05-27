@@ -14,13 +14,13 @@ namespace Shop.Database.MongoDB
             _databaseContext = databaseContext;
         }
 
-        public override async Task<List<TModel>> GetDatabaseList<TModel>()
+        public override Task<List<TModel>> GetDatabaseList<TModel>()
         {
             var userCollection = _databaseContext.GetCollection<TModel>()
                 .Find(Builders<TModel>.Filter.Empty);
             if (userCollection == null) throw new NullReferenceException();
 
-            return await userCollection.ToListAsync();
+            return userCollection.ToListAsync();
         }
 
         public override void AddInDatabase<TModel>(TModel model)
