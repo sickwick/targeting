@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Shop.Core.Interfaces.DataProviders;
-using Shop.Core.Interfaces.Services;
 using Shop.Core.ListHolders;
-using Shop.Core.Models;
 using Shop.Storage.Extensions;
+using Shop.Storage.Interfaces.DataProviders;
+using Shop.Storage.Interfaces.Services;
+using Shop.Storage.Models;
 
 namespace Shop.Core.Services
 {

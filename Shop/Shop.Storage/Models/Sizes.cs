@@ -1,4 +1,4 @@
-namespace Shop.Core.Models
+namespace Shop.Storage.Models
 {
     public class Sizes
     {

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.Design;
 using Microsoft.Extensions.DependencyInjection;
 using Shop.Core.DataProviders;
-using Shop.Core.Interfaces.DataProviders;
-using Shop.Core.Models;
+using Shop.Storage.Interfaces.DataProviders;
+using Shop.Storage.Models;
 
 namespace Shop.Core.ListHolders
 {

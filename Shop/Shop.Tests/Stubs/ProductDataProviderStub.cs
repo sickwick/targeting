@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.Extensions.Caching.Memory;
-using Shop.Core.Interfaces.DataProviders;
-using Shop.Core.Models;
 using Shop.Database;
+using Shop.Storage.Interfaces.DataProviders;
+using Shop.Storage.Models;
 
 namespace Shop.Tests.Stubs
 {

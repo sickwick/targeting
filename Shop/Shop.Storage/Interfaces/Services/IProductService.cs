@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using Shop.Core.Models;
+using Shop.Storage.Models;
 
-namespace Shop.Core.Interfaces.Services
+namespace Shop.Storage.Interfaces.Services
 {
     public interface IProductService
     {

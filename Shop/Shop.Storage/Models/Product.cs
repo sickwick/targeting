@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Shop.Core.Models
+namespace Shop.Storage.Models
 {
     public class Product
     {

@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Shop.Core.Models;
+using Shop.Storage.Models;
 
 namespace Shop.Tests.Stubs
 {

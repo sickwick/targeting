@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.Caching.Memory;
-using Shop.Core.Interfaces.DataProviders;
 using Shop.Core.ListHolders;
-using Shop.Core.Models;
 using Shop.Database;
 using Shop.Storage.Extensions;
 using Shop.Database.MongoDB;
+using Shop.Storage.Interfaces.DataProviders;
+using Shop.Storage.Models;
 
 namespace Shop.Core.DataProviders
 {

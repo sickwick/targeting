@@ -1,7 +1,7 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
-using Shop.Core.Interfaces.Services;
-using Shop.Core.Models;
+using Shop.Storage.Interfaces.Services;
+using Shop.Storage.Models;
 
 namespace Shop.WebAPI.Controllers
 {

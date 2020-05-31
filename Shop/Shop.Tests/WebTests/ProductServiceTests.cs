@@ -1,9 +1,9 @@
 using System;
 using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
-using Shop.Core.Interfaces.Services;
-using Shop.Core.Models;
 using Shop.Storage.Extensions;
+using Shop.Storage.Interfaces.Services;
+using Shop.Storage.Models;
 using Shop.Tests.Mocks;
 using Shop.Tests.Stubs;
 using Xunit;
