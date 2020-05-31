@@ -1,32 +1,42 @@
 using System;
 using System.Linq;
-using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
-using Shop.Core;
-using Shop.Core.DataProviders;
-using Shop.Core.Interfaces.DataProviders;
-using Shop.Core.Interfaces.Services;
-using Shop.Core.Models;
-using Shop.Core.Services;
-using Shop.Database.Extensions;
-using Shop.Database.Stubs;
+using Shop.Storage.Extensions;
+using Shop.Storage.Interfaces.Services;
+using Shop.Storage.Models;
 using Shop.Tests.Mocks;
-using Shop.WebAPI;
+using Shop.Tests.Stubs;
 using Xunit;
 
 namespace Shop.Tests.WebTests
 {
     public class ProductServiceTests
     {
-        private readonly IProductService _productService;
-        private readonly ProductsStub _productsStub;
-        private readonly DatabaseMock _databaseMock;
-
         public ProductServiceTests()
         {
             _productService = ProductServiceContainerConfig.GetContainer().GetService<IProductService>();
             _productsStub = new ProductsStub();
             _databaseMock = new DatabaseMock();
+        }
+
+        private readonly IProductService _productService;
+        private readonly ProductsStub _productsStub;
+        private readonly DatabaseMock _databaseMock;
+
+        [Fact]
+        public void Is_AddNewProduct_correctly_add_data()
+        {
+        }
+
+        [Fact]
+        public void Is_AddNewProduct_have_check_parameter()
+        {
+            Assert.Throws<ArgumentNullException>(() => _productService.AddNewProduct(default).SerializeObject());
+            Assert.Throws<ArgumentNullException>(() => _productService.AddNewProduct(new Product {Article = -1}));
+            Assert.Throws<ArgumentNullException>(() =>
+                _productService.AddNewProduct(new Product {Article = long.MaxValue}));
+            Assert.Throws<ArgumentNullException>(() =>
+                _productService.AddNewProduct(new Product {Article = long.MinValue}));
         }
 
         [Fact]
@@ -85,33 +95,12 @@ namespace Shop.Tests.WebTests
             Assert.NotEqual(_productService.GetSizes(12345).SerializeObject(),
                 _productsStub.Products.FirstOrDefault(i => i.Article == 12454).SizesAvailable.SerializeObject());
             for (long i = 1; i < 20000; i++)
-            {
                 if (i == 12345 || i == 12454)
-                {
                     Assert.Equal(_productService.GetSizes(i).SerializeObject(),
                         _productsStub.Products.FirstOrDefault(product => product.Article == i).SizesAvailable
                             .SerializeObject());
-                }
                 else
-                {
-                    Assert.Throws<ArgumentException>(() => _productService.GetSizes(i));   
-                }
-            }
-        }
-
-        [Fact]
-        public void Is_AddNewProduct_have_check_parameter()
-        {
-            Assert.Throws<ArgumentNullException>(() => _productService.AddNewProduct(default).SerializeObject());
-            Assert.Throws<ArgumentNullException>(() => _productService.AddNewProduct(new Product(){Article = -1}));
-            Assert.Throws<ArgumentNullException>(() => _productService.AddNewProduct(new Product(){Article = long.MaxValue}));
-            Assert.Throws<ArgumentNullException>(() => _productService.AddNewProduct(new Product(){Article = long.MinValue}));
-        }
-
-        [Fact]
-        public void Is_AddNewProduct_correctly_add_data()
-        {
-            
+                    Assert.Throws<ArgumentException>(() => _productService.GetSizes(i));
         }
     }
 }

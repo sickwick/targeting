@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.Design;
 using Microsoft.Extensions.DependencyInjection;
 using Shop.Core.DataProviders;
-using Shop.Core.Interfaces.DataProviders;
-using Shop.Core.Models;
+using Shop.Storage.Interfaces.DataProviders;
+using Shop.Storage.Models;
 
 namespace Shop.Core.ListHolders
 {
@@ -13,7 +13,7 @@ namespace Shop.Core.ListHolders
         private static readonly Lazy<ProductListHolder> _singleInstance =
             new Lazy<ProductListHolder>(()=>new ProductListHolder());
 
-        public List<Product> ProductList;
+        internal List<Product> ProductList;
         private IProductDataProvider _productDataProvider;
 
         private ProductListHolder()

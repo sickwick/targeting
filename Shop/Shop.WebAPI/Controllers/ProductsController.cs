@@ -1,20 +1,21 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
-using Shop.Core.Interfaces.Services;
-using Shop.Core.Models;
+using Shop.Storage.Interfaces.Services;
+using Shop.Storage.Models;
 
 namespace Shop.WebAPI.Controllers
 {
     [ApiController]
     [Route("api/products")]
-    public class ProductsController: ControllerBase
+    public class ProductsController : ControllerBase
     {
         private readonly IProductService _productService;
-        
+
         public ProductsController(IProductService productService)
         {
             _productService = productService;
         }
+
         [HttpGet]
         public IActionResult GetAllProducts()
         {
@@ -22,7 +23,7 @@ namespace Shop.WebAPI.Controllers
             {
                 return Ok(_productService.GetAllProducts());
             }
-            catch(Exception ex)
+            catch (ArgumentNullException ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -32,11 +33,12 @@ namespace Shop.WebAPI.Controllers
         [Route("product")]
         public IActionResult GetProduct([FromQuery] Product product)
         {
+            if (product == null) throw new ArgumentNullException(nameof(product));
             try
             {
                 return Ok(_productService.GetProduct(product.Article));
             }
-            catch (Exception ex)
+            catch (ArgumentNullException ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -46,11 +48,12 @@ namespace Shop.WebAPI.Controllers
         [Route("size")]
         public IActionResult GetSizes([FromQuery] Product product)
         {
+            if (product == null) throw new ArgumentNullException(nameof(product));
             try
             {
                 return Ok(_productService.GetSizes(product.Article));
             }
-            catch (Exception ex)
+            catch (ArgumentNullException ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -59,11 +62,13 @@ namespace Shop.WebAPI.Controllers
         [HttpPost]
         public IActionResult AddProduct(Product product)
         {
+            if (product == null) throw new ArgumentNullException(nameof(product));
+            
             try
             {
                 return Ok(_productService.AddNewProduct(product));
             }
-            catch(Exception ex)
+            catch (ArgumentNullException ex)
             {
                 return BadRequest(ex);
             }

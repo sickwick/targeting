@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using Shop.Core.Models;
+using Shop.Storage.Models;
 
-namespace Shop.Core.Interfaces.DataProviders
+namespace Shop.Storage.Interfaces.DataProviders
 {
     public interface IProductDataProvider
     {

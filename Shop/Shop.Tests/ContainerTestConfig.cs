@@ -2,17 +2,16 @@ using System;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Shop.Core;
 using Shop.Core.DataProviders;
-using Shop.Core.Interfaces.DataProviders;
-using Shop.Core.Interfaces.Services;
 using Shop.Core.Services;
+using Shop.Storage.Interfaces.DataProviders;
+using Shop.Storage.Interfaces.Services;
 
 namespace Shop.Tests
 {
     public class ContainerTestConfig
     {
-        private static Lazy<IServiceProvider> _lazyContainer = new Lazy<IServiceProvider>(BuildContainer);
+        private static readonly Lazy<IServiceProvider> _lazyContainer = new Lazy<IServiceProvider>(BuildContainer);
 
         public static IServiceProvider ServiceProvider { get; private set; }
 
@@ -36,6 +35,5 @@ namespace Shop.Tests
             // _serviceProvider = BuildAutofacContainer();
             return _lazyContainer.Value;
         }
-        
     }
 }

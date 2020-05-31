@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Shop.Core.Interfaces.DataProviders;
-using Shop.Core.Interfaces.Services;
 using Shop.Core.ListHolders;
-using Shop.Core.Models;
-using Shop.Database.Extensions;
+using Shop.Storage.Extensions;
+using Shop.Storage.Interfaces.DataProviders;
+using Shop.Storage.Interfaces.Services;
+using Shop.Storage.Models;
 
 namespace Shop.Core.Services
 {
@@ -22,10 +22,7 @@ namespace Shop.Core.Services
 
         public List<Product> GetAllProducts()
         {
-            if (!_products.IsNullOrEmpty())
-            {
-                return _products;
-            }
+            if (!_products.IsNullOrEmpty()) return _products;
 
             throw new NullReferenceException();
         }
@@ -33,31 +30,23 @@ namespace Shop.Core.Services
         public Product GetProduct(long article)
         {
             if (CheckParameterIncorrect(article) && _products.Any(p => p.Article == article))
-            {
                 return _products.FirstOrDefault(p => p.Article == article);
-            }
 
             throw new ArgumentException();
         }
 
-        public Sizes GetSizes(long article)
+        public List<Sizes> GetSizes(long article)
         {
-            if (CheckParameterIncorrect(article))
-            {
-                return GetProduct(article).SizesAvailable;
-            }
+            if (CheckParameterIncorrect(article)) return GetProduct(article).SizesAvailable.ToList();
 
             throw new ArgumentNullException();
         }
 
         public bool AddNewProduct(Product product)
         {
-            if (!CheckParameterIncorrect(product))
-            {
-                return _productDataProvider.AddProductInDatabase(product);
-            }
-            
-            throw new ArgumentException();
+            if (!CheckParameterIncorrect(product)) return _productDataProvider.AddProductInDatabase(product);
+
+            throw new ArgumentNullException();
         }
 
         private bool CheckParameterIncorrect(long param)
@@ -66,7 +55,6 @@ namespace Shop.Core.Services
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="product"></param>
         /// <returns>True - when you has WRONG product argument, else false </returns>

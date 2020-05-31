@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 
-namespace Shop.Database.Extensions
+namespace Shop.Storage.Extensions
 {
-    public static class Extensions
+    public static class HelperExtensions
     {
         /// <summary>
         /// Convert any type to json string
