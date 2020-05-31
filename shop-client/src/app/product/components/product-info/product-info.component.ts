@@ -22,7 +22,7 @@ export class ProductInfoComponent implements OnInit {
     color: '#fff',
     text: 'Добавить в корзину',
   };
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
   }
