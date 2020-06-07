@@ -1,13 +1,13 @@
 .container-product {
   display: grid;
-  grid-template-columns: 72vw 27vw;
+  grid-template-columns: 71vw 29vw;
   grid-template-areas: "photos info";
   margin-top: 2vh;
 
   .photos {
     grid-area: photos;
     display: grid;
-    grid-template-columns: 32vw 32vw;
+    grid-template-columns: 24vw 24vw;
     grid-column-gap: 14px;
     grid-row-gap: 7px;
     justify-content: center;
@@ -20,6 +20,7 @@
   .info {
     grid-area: info;
     height: 100%;
+    width: 75%;
 
     .info-body {
       margin: 0 2vw 0 2vw;
