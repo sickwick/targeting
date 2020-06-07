@@ -8,8 +8,8 @@ export interface IProduct {
   label: string;
   season?: string;
   gender: boolean;
-  photo: string[];
+  photos: string[];
   about?: string;
   price?: number;
-  sizesAvailable: ISizes;
+  sizesAvailable: ISizes[];
 }

@@ -8,7 +8,7 @@ import {ISizes} from '../../models/isizes';
 })
 export class SizeBlockComponent implements OnInit {
 
-  @Input() sizesList: Array<ISizes>;
+  @Input() sizesList: ISizes[];
 
   constructor() {
   }
