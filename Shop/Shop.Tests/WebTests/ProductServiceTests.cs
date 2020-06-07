@@ -1,11 +1,11 @@
 using System;
 using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
+using Shop.Database.Stubs;
 using Shop.Storage.Extensions;
 using Shop.Storage.Interfaces.Services;
 using Shop.Storage.Models;
 using Shop.Tests.Mocks;
-using Shop.Tests.Stubs;
 using Xunit;
 
 namespace Shop.Tests.WebTests

@@ -22,7 +22,10 @@ namespace Shop.Core.Services
 
         public List<Product> GetAllProducts()
         {
-            if (!_products.IsNullOrEmpty()) return _products;
+            if (!_products.IsNullOrEmpty())
+            {
+                return _products;
+            }
 
             throw new NullReferenceException();
         }

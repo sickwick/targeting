@@ -1,11 +1,7 @@
 using System;
-using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Shop.Core.DataProviders;
-using Shop.Core.Services;
-using Shop.Storage.Interfaces.DataProviders;
-using Shop.Storage.Interfaces.Services;
+
 
 namespace Shop.Core
 {
@@ -13,14 +9,15 @@ namespace Shop.Core
     {
         public ContainerConfig(IServiceCollection service)
         {
-            service.TryAdd(ServiceDescriptor.Singleton<IMemoryCache, MemoryCache>());
-
-            service.AddTransient<IProductService, ProductService>();
-            service.AddTransient<IProductDataProvider, ProductDataProvider>();
-
-            ServiceProvider = service.BuildServiceProvider();
+            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
+            {
+                ServiceProvider = new ContainerConfigStub(service).Builder().BuildServiceProvider();
+            }
+            else
+            {
+                ServiceProvider = new ContainerConfigProd(service).Builder().BuildServiceProvider();
+            }
         }
-
         public static IServiceProvider ServiceProvider { get; private set; }
     }
 }

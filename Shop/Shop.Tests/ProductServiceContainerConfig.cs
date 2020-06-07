@@ -3,9 +3,9 @@ using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Shop.Core.Services;
+using Shop.Database.Stubs;
 using Shop.Storage.Interfaces.DataProviders;
 using Shop.Storage.Interfaces.Services;
-using Shop.Tests.Stubs;
 
 namespace Shop.Tests
 {
