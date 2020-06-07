@@ -1,16 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { InfoComponent } from './components/info/info.component';
+import { ProductContentComponent } from './components/product-content/product-content.component';
 import {SharedModule} from '../shared/shared.module';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import { ProductInfoComponent } from './components/product-info/product-info.component';
 
 
 
 
 @NgModule({
-  declarations: [InfoComponent],
+  declarations: [ProductContentComponent, ProductInfoComponent],
   imports: [
     CommonModule,
     SharedModule,
@@ -18,6 +19,6 @@ import {MatIconModule} from '@angular/material/icon';
     MatButtonModule,
     MatIconModule,
   ],
-  exports: [InfoComponent]
+  exports: [ProductContentComponent]
 })
 export class ProductModule { }

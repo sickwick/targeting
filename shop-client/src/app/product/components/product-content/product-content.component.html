@@ -1,0 +1,10 @@
+<div class="container-product">
+  <div  class="photos">
+    <div *ngFor="let phot of product.photo">
+      <img class="img" src="{{phot}}" alt="">
+    </div>
+  </div>
+  <div class="info">
+    <app-product-info [product]="product"></app-product-info>
+  </div>
+</div>

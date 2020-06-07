@@ -6,24 +6,13 @@ import {IButton} from '../../../models/ibutton';
 
 @Component({
   selector: 'app-info',
-  templateUrl: './info.component.html',
-  styleUrls: ['./info.component.scss']
+  templateUrl: './product-content.component.html',
+  styleUrls: ['./product-content.component.scss']
 })
-export class InfoComponent implements OnInit {
+export class ProductContentComponent implements OnInit {
 
   public product: IProduct;
   private article: number;
-  public favorite: IButton = {
-    backgroundColor: '#ccc',
-    text: 'Избранное',
-    icon: 'favorite'
-  };
-
-  public addToCard: IButton = {
-    backgroundColor: 'black',
-    color: '#fff',
-    text: 'Добавить в корзину',
-  };
 
   constructor(
     private utility: UtilityService,
