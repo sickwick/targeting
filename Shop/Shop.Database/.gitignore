@@ -501,5 +501,5 @@ healthchecksdb
 MigrationBackup/
 
 obj
-
+bin
 # End of https://www.gitignore.io/api/rider,linux,macos,windows,dotnetcore,visualstudio

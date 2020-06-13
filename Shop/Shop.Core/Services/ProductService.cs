@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Shop.Core.ListHolders;
 using Shop.Storage.Extensions;
 using Shop.Storage.Interfaces.DataProviders;
 using Shop.Storage.Interfaces.Services;
@@ -17,14 +16,14 @@ namespace Shop.Core.Services
         public ProductService(IProductDataProvider productDataProvider)
         {
             _productDataProvider = productDataProvider;
-            _products = ProductListHolder.GetInstance().ProductList;
+            _products = _productDataProvider?.GetProducts();
         }
 
         public List<Product> GetAllProducts()
         {
             if (!_products.IsNullOrEmpty())
             {
-                return _products;
+                return _productDataProvider.GetProducts();
             }
 
             throw new NullReferenceException();
@@ -32,27 +31,30 @@ namespace Shop.Core.Services
 
         public Product GetProduct(long article)
         {
-            if (CheckParameterIncorrect(article) && _products.Any(p => p.Article == article))
+            if (CheckParameterCorrect(article) && _products.Any(p => p.Article == article))
                 return _products.FirstOrDefault(p => p.Article == article);
 
-            throw new ArgumentException();
+            throw new ArgumentException("Параметр не прошел проверку", nameof(article));
         }
 
         public List<Sizes> GetSizes(long article)
         {
-            if (CheckParameterIncorrect(article)) return GetProduct(article).SizesAvailable.ToList();
+            if (CheckParameterCorrect(article)) return GetProduct(article).SizesAvailable.ToList();
 
-            throw new ArgumentNullException();
+            throw new ArgumentException("Параметр не прошел проверку", nameof(article));
         }
 
         public bool AddNewProduct(Product product)
         {
-            if (!CheckParameterIncorrect(product)) return _productDataProvider.AddProductInDatabase(product);
+            if (CheckParameterCorrect(product))
+            {
+                return _productDataProvider.AddProductInDatabase(product);
+            }
 
-            throw new ArgumentNullException();
+            throw new ArgumentException("Параметр не прошел проверку", nameof(product));
         }
 
-        private bool CheckParameterIncorrect(long param)
+        private bool CheckParameterCorrect(long param)
         {
             return param > 0 && param != default && param < long.MaxValue;
         }
@@ -61,10 +63,10 @@ namespace Shop.Core.Services
         /// </summary>
         /// <param name="product"></param>
         /// <returns>True - when you has WRONG product argument, else false </returns>
-        private bool CheckParameterIncorrect(Product product)
+        private bool CheckParameterCorrect(Product product)
         {
-            return string.IsNullOrEmpty(product.Title) &&
-                   string.IsNullOrEmpty(product.Label) && CheckParameterIncorrect(product.Article);
+            return !string.IsNullOrEmpty(product.Title) &&
+                   !string.IsNullOrEmpty(product.Label) && CheckParameterCorrect(product.Article);
         }
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Runtime.CompilerServices;
 using Microsoft.Extensions.DependencyInjection;
 using Shop.Core.DataProviders;
 using Shop.Storage.Interfaces.DataProviders;
@@ -11,7 +12,7 @@ namespace Shop.Core.ListHolders
     public sealed class ProductListHolder
     {
         private static readonly Lazy<ProductListHolder> _singleInstance =
-            new Lazy<ProductListHolder>(()=>new ProductListHolder());
+            new Lazy<ProductListHolder>(() => new ProductListHolder());
 
         internal List<Product> ProductList;
         private IProductDataProvider _productDataProvider;

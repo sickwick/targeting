@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
 using Shop.Database.Stubs;
@@ -8,7 +9,7 @@ using Shop.Storage.Models;
 using Shop.Tests.Mocks;
 using Xunit;
 
-namespace Shop.Tests.WebTests
+namespace Shop.Tests.ServiceTests
 {
     public class ProductServiceTests
     {
@@ -26,16 +27,16 @@ namespace Shop.Tests.WebTests
         [Fact]
         public void Is_AddNewProduct_correctly_add_data()
         {
+            Assert.True(_productService.AddNewProduct(new Product() { Article = 123, Title = "test", Label = "Test" }));
         }
 
         [Fact]
         public void Is_AddNewProduct_have_check_parameter()
         {
-            Assert.Throws<ArgumentNullException>(() => _productService.AddNewProduct(default).SerializeObject());
-            Assert.Throws<ArgumentNullException>(() => _productService.AddNewProduct(new Product {Article = -1}));
-            Assert.Throws<ArgumentNullException>(() =>
+            Assert.Throws<ArgumentException>(() => _productService.AddNewProduct(new Product { Article = - 1 }));
+            Assert.Throws<ArgumentException>(() =>
                 _productService.AddNewProduct(new Product {Article = long.MaxValue}));
-            Assert.Throws<ArgumentNullException>(() =>
+            Assert.Throws<ArgumentException>(() =>
                 _productService.AddNewProduct(new Product {Article = long.MinValue}));
         }
 
@@ -49,7 +50,7 @@ namespace Shop.Tests.WebTests
         [Fact]
         public void Is_GetAllProducts_return_correct_data()
         {
-            Assert.Equal(_productService.GetAllProducts().SerializeObject(),
+            Assert.Equal(_productService.GetAllProducts().GetRange(0,4).SerializeObject(),
                 _productsStub.Products.SerializeObject());
         }
 
@@ -78,10 +79,10 @@ namespace Shop.Tests.WebTests
         [Fact]
         public void Is_GetSizes_have_check_parameter()
         {
-            Assert.Throws<ArgumentNullException>(() => _productService.GetSizes(default));
-            Assert.Throws<ArgumentNullException>(() => _productService.GetSizes(-1));
-            Assert.Throws<ArgumentNullException>(() => _productService.GetSizes(long.MaxValue));
-            Assert.Throws<ArgumentNullException>(() => _productService.GetSizes(long.MinValue));
+            Assert.Throws<ArgumentException>(() => _productService.GetSizes(default));
+            Assert.Throws<ArgumentException>(() => _productService.GetSizes(-1));
+            Assert.Throws<ArgumentException>(() => _productService.GetSizes(long.MaxValue));
+            Assert.Throws<ArgumentException>(() => _productService.GetSizes(long.MinValue));
             Assert.Equal(_productService.GetSizes(12345).SerializeObject(),
                 _productsStub.Products.FirstOrDefault(i => i.Article == 12345).SizesAvailable.SerializeObject());
         }
@@ -91,7 +92,6 @@ namespace Shop.Tests.WebTests
         {
             Assert.Equal(_productService.GetSizes(12345).SerializeObject(),
                 _productsStub.Products.FirstOrDefault(i => i.Article == 12345).SizesAvailable.SerializeObject());
-            // Assert.True(_productService.GetSizes(12345).Any());
             Assert.NotEqual(_productService.GetSizes(12345).SerializeObject(),
                 _productsStub.Products.FirstOrDefault(i => i.Article == 12454).SizesAvailable.SerializeObject());
             for (long i = 1; i < 20000; i++)

@@ -26,8 +26,8 @@ jobs:
       run: |
         cd Shop
         dotnet build --configuration Release --no-restore
-#     - name: Test
-#       run: dotnet test --no-restore --verbosity normal
+     - name: Test
+       run: dotnet test --no-restore --verbosity normal
   
  build-frontend:
     runs-on: ubuntu-latest

@@ -33,7 +33,7 @@ namespace Shop.Database.Stubs
 
         public bool AddProductInDatabase(Product product)
         {
-            return false;
+            return true;
         }
 
         private void SetCache(List<Product> productList, int lifeTime)

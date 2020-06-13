@@ -9,9 +9,19 @@ using Shop.Storage.Interfaces.Services;
 
 namespace Shop.Tests
 {
-    public static class ProductServiceContainerConfig
+    internal class ProductServiceContainerConfig
     {
-        private static readonly Lazy<IServiceProvider> _lazyContainer = new Lazy<IServiceProvider>(BuildContainer);
+        static ProductServiceContainerConfig()
+        {
+            if (_lazyContainer == null)
+            {
+                _lazyContainer = new Lazy<IServiceProvider>();
+            }
+        }
+
+
+        private static readonly Lazy<IServiceProvider> _lazyContainer =
+            new Lazy<IServiceProvider>(BuildContainer);
 
         private static IServiceProvider BuildContainer()
         {

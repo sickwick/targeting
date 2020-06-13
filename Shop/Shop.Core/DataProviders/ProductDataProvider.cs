@@ -33,10 +33,19 @@ namespace Shop.Core.DataProviders
         /// <returns>Products list</returns>
         public List<Product> GetProducts()
         {
-            if (_cache.TryGetValue(CacheName, out _products)) return _products;
+            if (_cache.TryGetValue(CacheName, out _products))
+            { 
+                return ProductListHolder.GetInstance().ProductList;
+            }
+
             _products = _databaseBase.GetDatabaseList<Product>().Result;
-            if (_products.IsNullOrEmpty() || _products.Any(i => i.Article == 0)) throw new NullReferenceException();
-            SetCache(_products, 1);
+            if (_products.IsNullOrEmpty() || _products.Any(i => i.Article == 0)) {
+                SetCache(_products, 1);
+            }
+            else
+            {
+                throw new NullReferenceException();
+            }
 
             return _products;
         }
