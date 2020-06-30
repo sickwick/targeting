@@ -24,9 +24,9 @@ namespace Shop.Database.MongoDB
             return database;
         }
 
-        public IMongoCollection<TModel> GetCollection<TModel>()
+        public IMongoCollection<TModel> GetCollection<TModel>(string collectionName)
         {
-            return ConnectToDatabase().GetCollection<TModel>("Products");
+            return ConnectToDatabase().GetCollection<TModel>(collectionName);
         }
     }
 }

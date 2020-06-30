@@ -16,7 +16,7 @@ namespace Shop.Database.MongoDB
 
         public override Task<List<TModel>> GetDatabaseList<TModel>()
         {
-            var userCollection = _databaseContext.GetCollection<TModel>()
+            var userCollection = _databaseContext.GetCollection<TModel>("Products")
                 .Find(Builders<TModel>.Filter.Empty);
             if (userCollection == null) throw new NullReferenceException();
 
@@ -25,7 +25,7 @@ namespace Shop.Database.MongoDB
 
         public override void AddInDatabase<TModel>(TModel model)
         {
-            _databaseContext.GetCollection<TModel>().InsertOne(model);
+            _databaseContext.GetCollection<TModel>("Products").InsertOne(model);
         }
 
         public override void ChangeModelInDatabase<TModel>(TModel model, TModel newModel)
@@ -34,6 +34,11 @@ namespace Shop.Database.MongoDB
 
         public override void DeleteModelFromDatabase<TModel>(TModel model)
         {
+        }
+
+        public Task<object> GetTargetingData()
+        {
+            return null;
         }
     }
 }
