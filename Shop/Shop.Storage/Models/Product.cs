@@ -17,7 +17,7 @@ namespace Shop.Storage.Models
         public string Label { get; set; }
         public string Season { get; set; }
         public bool Gender { get; set; }
-        public List<string> Photo { get; set; }
+        public List<string> Photos { get; set; }
         public List<Sizes> SizesAvailable { get; set; }
         public double? Price { get; set; }
     }
