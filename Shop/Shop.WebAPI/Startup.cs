@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using Shop.Core;
+using Shop.Storage.Models;
 
 namespace Shop.WebAPI
 {
@@ -23,6 +24,7 @@ namespace Shop.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<RedisOptions>(Configuration.GetSection("RedisOptions"));
             services.AddControllers().AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             );
@@ -30,7 +32,7 @@ namespace Shop.WebAPI
             services.AddMemoryCache();
             services.AddDistributedMemoryCache();
 
-            services.TryAdd(ServiceDescriptor.Singleton(new ContainerConfig(services, Environment))); 
+            services.TryAdd(ServiceDescriptor.Singleton(new ContainerConfig(services, Environment)));
 
             // services.TryAdd(ServiceDescriptor.Singleton<IMemoryCache, MemoryCache>());  
         }
