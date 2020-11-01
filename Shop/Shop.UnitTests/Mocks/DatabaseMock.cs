@@ -1,15 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Shop.Database;
 
-namespace Shop.Database
+namespace Shop.UnitTests.Mocks
 {
-    public class MainDatabase : DatabaseBase
-
+    public class DatabaseMock : DatabaseBase
     {
         public override Task<List<TModel>> GetDatabaseList<TModel>()
         {
-            throw new NotImplementedException();
+            return new Task<List<TModel>>(null);
         }
 
         public override void AddInDatabase<TModel>(TModel model)
