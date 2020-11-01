@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -5,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
+using Shop.Api.Config;
 using Shop.Api.Core;
 
 namespace Shop.API
@@ -29,8 +31,9 @@ namespace Shop.API
             services.AddCors();
             services.AddMemoryCache();
             services.AddDistributedMemoryCache();
+            services.AddAutoMapper(typeof(Startup));
 
-            services.TryAdd(ServiceDescriptor.Singleton(new ContainerConfig(services, Environment))); 
+            services.TryAdd(ServiceDescriptor.Singleton(new ContainerConfig(services))); 
 
             // services.TryAdd(ServiceDescriptor.Singleton<IMemoryCache, MemoryCache>());  
         }

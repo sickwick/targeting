@@ -5,19 +5,21 @@
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-        <CodeAnalysisRuleSet>..\Shop.Storage\Stylecop.ruleset</CodeAnalysisRuleSet>
+        <CodeAnalysisRuleSet>..\Shop.Api.Config\Stylecop.ruleset</CodeAnalysisRuleSet>
     </PropertyGroup>
     
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-        <CodeAnalysisRuleSet>..\Shop.Storage\Stylecop.ruleset</CodeAnalysisRuleSet>
+        <CodeAnalysisRuleSet>..\Shop.Api.Config\Stylecop.ruleset</CodeAnalysisRuleSet>
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Shop.Api.Config\Shop.Api.Config.csproj" />
       <ProjectReference Include="..\Shop.Api.Core\Shop.Api.Core.csproj" />
       <ProjectReference Include="..\Shop.Targeting\Shop.Targeting.csproj" />
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
       <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.4" />
     </ItemGroup>
 

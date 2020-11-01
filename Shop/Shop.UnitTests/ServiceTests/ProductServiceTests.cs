@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Shop.Api.Core.Abstract;
 using Shop.Api.Core.Models;
 using Shop.Api.Core.Services;
+using Shop.Api.Data;
 using Shop.Database.Stubs;
 using Shop.UnitTests.Mocks;
 using Xunit;

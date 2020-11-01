@@ -1,28 +1,33 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using Shop.Api.Core.Abstract;
 using Shop.Api.Core.Models;
+using Shop.Api.Data;
 using Shop.Api.Data.Abstract;
+using Shop.Api.Data.Models;
 
 namespace Shop.Api.Core.Services
 {
     public class ProductService : IProductService
     {
         private readonly IProductDataProvider _productDataProvider;
-        private readonly List<Product> _products;
+        private readonly IMapper _mapper;
 
-        public ProductService(IProductDataProvider productDataProvider)
+        public ProductService(IProductDataProvider productDataProvider, IMapper mapper)
         {
             _productDataProvider = productDataProvider;
-            _products = _productDataProvider?.GetProducts();
+            _mapper = mapper;
         }
 
         public List<Product> GetAllProducts()
         {
-            if (!_products.IsNullOrEmpty())
+            var products = _productDataProvider.GetProducts();
+            if (!products.IsNullOrEmpty())
             {
-                return _productDataProvider.GetProducts();
+                var result = _mapper.Map<List<Product>>(products);
+                return result;
             }
 
             throw new NullReferenceException();
@@ -30,8 +35,9 @@ namespace Shop.Api.Core.Services
 
         public Product GetProduct(long article)
         {
-            if (CheckParameterCorrect(article) && _products.Any(p => p.Article == article))
-                return _products.FirstOrDefault(p => p.Article == article);
+            var products = _mapper.Map<List<Product>>(_productDataProvider.GetProducts());
+            if (CheckParameterCorrect(article) && products.Any(p => p.Article == article))
+                return products.FirstOrDefault(p => p.Article == article);
 
             throw new ArgumentException("�������� �� ������ ��������", nameof(article));
         }
@@ -47,7 +53,7 @@ namespace Shop.Api.Core.Services
         {
             if (CheckParameterCorrect(product))
             {
-                return _productDataProvider.AddProductInDatabase(product);
+                return _productDataProvider.AddProductInDatabase(_mapper.Map<ProductDto>(product));
             }
 
             throw new ArgumentException("�������� �� ������ ��������", nameof(product));
