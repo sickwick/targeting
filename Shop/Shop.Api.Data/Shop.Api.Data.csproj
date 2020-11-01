@@ -5,7 +5,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Shop.Api.Core\Shop.Api.Core.csproj" />
+      <PackageReference Include="MongoDB.Bson" Version="2.11.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Shop.Database\Shop.Database.csproj" />
     </ItemGroup>
 
 </Project>

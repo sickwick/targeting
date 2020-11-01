@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.Caching.Memory;
-using Shop.Api.Core.Models;
-using Shop.Api.Core.Services;
 using Shop.Api.Data.Abstract;
 using Shop.Api.Data.ListHolders;
 using Shop.Api.Data.Models;
@@ -17,7 +15,7 @@ namespace Shop.Api.Data.Providers
         private const string CacheName = "ProductsList";
         private readonly IMemoryCache _cache;
         private readonly DatabaseBase _databaseBase;
-        private List<ProductDTO> _products;
+        private List<ProductDto> _products;
 
         public ProductDataProvider(IMemoryCache memoryCache)
         {
@@ -32,14 +30,14 @@ namespace Shop.Api.Data.Providers
         ///     else do new request to db and return them
         /// </summary>
         /// <returns>Products list</returns>
-        public List<ProductDTO> GetProducts()
+        public List<ProductDto> GetProducts()
         {
             if (_cache.TryGetValue(CacheName, out _products))
             { 
                 return ProductListHolder.GetInstance().ProductList;
             }
 
-            _products = _databaseBase.GetDatabaseList<ProductDTO>().Result;
+            _products = _databaseBase.GetDatabaseList<ProductDto>().Result;
             if (_products.IsNullOrEmpty() || _products.Any(i => i.Article == 0)) {
                 SetCache(_products, 1);
             }
@@ -55,7 +53,7 @@ namespace Shop.Api.Data.Providers
         ///     Function add new item in list and try to update cache
         /// </summary>
         /// <param name="product"></param>
-        public bool AddProductInDatabase(ProductDTO product)
+        public bool AddProductInDatabase(ProductDto product)
         {
             if (_products.IsNullOrEmpty()) _products = GetProducts();
 
@@ -71,10 +69,10 @@ namespace Shop.Api.Data.Providers
                 throw new ArgumentException();
             }
 
-            return _cache.TryGetValue(CacheName, out List<ProductDTO> newCache) && newCache.SequenceEqual(_products);
+            return _cache.TryGetValue(CacheName, out List<ProductDto> newCache) && newCache.SequenceEqual(_products);
         }
 
-        private void SetCache(List<ProductDTO> productList, int lifeTime)
+        private void SetCache(List<ProductDto> productList, int lifeTime)
         {
             _cache.Set(CacheName, productList, new MemoryCacheEntryOptions
             {

@@ -3,8 +3,9 @@ using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Shop.Api.Core.Abstract;
-using Shop.Api.Core.DataProviders;
 using Shop.Api.Core.Services;
+using Shop.Api.Data.Abstract;
+using Shop.Api.Data.Providers;
 
 namespace Shop.UnitTests
 {

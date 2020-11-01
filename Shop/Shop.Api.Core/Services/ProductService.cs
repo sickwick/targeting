@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Shop.Api.Core.Abstract;
 using Shop.Api.Core.Models;
+using Shop.Api.Data.Abstract;
 
 namespace Shop.Api.Core.Services
 {

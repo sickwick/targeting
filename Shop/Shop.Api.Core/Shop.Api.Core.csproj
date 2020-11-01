@@ -8,13 +8,12 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="AutoMapper" Version="10.1.1" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.4" />
-      <PackageReference Include="MongoDB.Bson" Version="2.10.3" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Shop.Database\Shop.Database.csproj" />
-      <ProjectReference Include="..\Shop.Storage\Shop.Storage.csproj" />
+      <ProjectReference Include="..\Shop.Api.Data\Shop.Api.Data.csproj" />
     </ItemGroup>
 
 </Project>

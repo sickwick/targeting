@@ -1,11 +1,10 @@
 using System.Collections.Generic;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using Shop.Api.Core.Models;
 
 namespace Shop.Api.Data.Models
 {
-    public class ProductDTO
+    public class ProductDto
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
@@ -19,7 +18,7 @@ namespace Shop.Api.Data.Models
         public string Season { get; set; }
         public bool Gender { get; set; }
         public List<string> Photos { get; set; }
-        public List<Sizes> SizesAvailable { get; set; }
+        public List<SizesDto> SizesAvailable { get; set; }
         public double? Price { get; set; }
     }
 }
