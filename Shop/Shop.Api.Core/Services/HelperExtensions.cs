@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 
-namespace Shop.Storage.Extensions
+namespace Shop.Api.Core.Services
 {
     public static class HelperExtensions
     {

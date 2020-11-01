@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
+using Shop.Api.Core.Abstract;
+using Shop.Api.Core.Models;
+using Shop.Api.Core.Services;
 using Shop.Database.Stubs;
-using Shop.Storage.Extensions;
-using Shop.Storage.Interfaces.Services;
-using Shop.Storage.Models;
 using Shop.UnitTests.Mocks;
 using Xunit;
 

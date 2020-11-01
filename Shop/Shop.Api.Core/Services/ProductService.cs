@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Shop.Storage.Extensions;
-using Shop.Storage.Interfaces.DataProviders;
-using Shop.Storage.Interfaces.Services;
-using Shop.Storage.Models;
+using Shop.Api.Core.Abstract;
+using Shop.Api.Core.Models;
 
 namespace Shop.Api.Core.Services
 {

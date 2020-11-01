@@ -1,20 +1,19 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Runtime.CompilerServices;
 using Microsoft.Extensions.DependencyInjection;
-using Shop.Api.Core.DataProviders;
-using Shop.Storage.Interfaces.DataProviders;
-using Shop.Storage.Models;
+using Shop.Api.Core;
+using Shop.Api.Core.Models;
+using Shop.Api.Data.Abstract;
+using Shop.Api.Data.Models;
 
-namespace Shop.Api.Core.ListHolders
+namespace Shop.Api.Data.ListHolders
 {
     public sealed class ProductListHolder
     {
         private static readonly Lazy<ProductListHolder> _singleInstance =
             new Lazy<ProductListHolder>(() => new ProductListHolder());
 
-        internal List<Product> ProductList;
+        internal List<ProductDTO> ProductList;
         private IProductDataProvider _productDataProvider;
 
         private ProductListHolder()
@@ -31,7 +30,7 @@ namespace Shop.Api.Core.ListHolders
             }
         }
 
-        public List<Product> GetProductList()
+        public List<ProductDTO> GetProductList()
         {
             return _productDataProvider.GetProducts();
         }

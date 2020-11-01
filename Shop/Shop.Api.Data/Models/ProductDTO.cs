@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using Shop.Api.Core.Models;
 
-namespace Shop.Storage.Models
+namespace Shop.Api.Data.Models
 {
-    public class Product
+    public class ProductDTO
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
