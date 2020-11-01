@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Shop.Api.Core.Models;
 
-namespace Shop.Database.Stubs
+namespace DatabaseStub
 {
     public class ProductsStub
     {

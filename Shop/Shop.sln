@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Api.Data", "Shop.Api.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Api.Config", "Shop.Api.Config\Shop.Api.Config.csproj", "{EB047020-C062-49A8-840F-A827844ED964}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseStub", "DatabaseStub\DatabaseStub.csproj", "{FD3F3EB1-B14D-45AC-A673-3640FB0C4174}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{EB047020-C062-49A8-840F-A827844ED964}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB047020-C062-49A8-840F-A827844ED964}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB047020-C062-49A8-840F-A827844ED964}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD3F3EB1-B14D-45AC-A673-3640FB0C4174}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD3F3EB1-B14D-45AC-A673-3640FB0C4174}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD3F3EB1-B14D-45AC-A673-3640FB0C4174}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD3F3EB1-B14D-45AC-A673-3640FB0C4174}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

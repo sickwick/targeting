@@ -1,10 +1,7 @@
 using System;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Hosting;
 
-namespace Shop.Api.Core
+namespace Shop.Api.Config
 {
     public class ContainerConfig
     {

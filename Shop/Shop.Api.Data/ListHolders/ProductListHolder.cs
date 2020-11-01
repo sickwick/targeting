@@ -15,7 +15,7 @@ namespace Shop.Api.Data.ListHolders
 
         private ProductListHolder()
         {
-            _productDataProvider = ContainerConfig.ServiceProvider.GetService<IProductDataProvider>();
+            // _productDataProvider = ContainerConfig.ServiceProvider.GetService<IProductDataProvider>();
             ProductList = GetProductList();
         }
 
