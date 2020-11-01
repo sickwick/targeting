@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Shop.Database;
 
-namespace Shop.Tests.Mocks
+namespace Shop.UnitTests.Mocks
 {
     public class DatabaseMock : DatabaseBase
     {

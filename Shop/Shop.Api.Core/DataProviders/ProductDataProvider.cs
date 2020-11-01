@@ -2,14 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.Caching.Memory;
-using Shop.Core.ListHolders;
+using Shop.Api.Core.ListHolders;
 using Shop.Database;
 using Shop.Storage.Extensions;
 using Shop.Database.MongoDB;
 using Shop.Storage.Interfaces.DataProviders;
 using Shop.Storage.Models;
 
-namespace Shop.Core.DataProviders
+namespace Shop.Api.Core.DataProviders
 {
     public class ProductDataProvider : IProductDataProvider
     {

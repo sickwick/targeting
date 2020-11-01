@@ -6,7 +6,7 @@ using Shop.Storage.Interfaces.DataProviders;
 using Shop.Storage.Interfaces.Services;
 using Shop.Storage.Models;
 
-namespace Shop.Core.Services
+namespace Shop.Api.Core.Services
 {
     public class ProductService : IProductService
     {
@@ -34,14 +34,14 @@ namespace Shop.Core.Services
             if (CheckParameterCorrect(article) && _products.Any(p => p.Article == article))
                 return _products.FirstOrDefault(p => p.Article == article);
 
-            throw new ArgumentException("Параметр не прошел проверку", nameof(article));
+            throw new ArgumentException("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ", nameof(article));
         }
 
         public List<Sizes> GetSizes(long article)
         {
             if (CheckParameterCorrect(article)) return GetProduct(article).SizesAvailable.ToList();
 
-            throw new ArgumentException("Параметр не прошел проверку", nameof(article));
+            throw new ArgumentException("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ", nameof(article));
         }
 
         public bool AddNewProduct(Product product)
@@ -51,7 +51,7 @@ namespace Shop.Core.Services
                 return _productDataProvider.AddProductInDatabase(product);
             }
 
-            throw new ArgumentException("Параметр не прошел проверку", nameof(product));
+            throw new ArgumentException("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ", nameof(product));
         }
 
         private bool CheckParameterCorrect(long param)

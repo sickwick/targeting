@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Shop.Storage.Interfaces.Services;
 using Shop.Storage.Models;
 
-namespace Shop.WebAPI.Controllers
+namespace Shop.API.Controllers
 {
     [ApiController]
     [Route("api/products")]

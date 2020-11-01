@@ -6,10 +6,10 @@ using Shop.Database.Stubs;
 using Shop.Storage.Extensions;
 using Shop.Storage.Interfaces.Services;
 using Shop.Storage.Models;
-using Shop.Tests.Mocks;
+using Shop.UnitTests.Mocks;
 using Xunit;
 
-namespace Shop.Tests.ServiceTests
+namespace Shop.UnitTests.ServiceTests
 {
     public class ProductServiceTests
     {

@@ -5,9 +5,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
-using Shop.Core;
+using Shop.Api.Core;
 
-namespace Shop.WebAPI
+namespace Shop.API
 {
     public class Startup
     {

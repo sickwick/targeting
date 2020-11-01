@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Runtime.CompilerServices;
 using Microsoft.Extensions.DependencyInjection;
-using Shop.Core.DataProviders;
+using Shop.Api.Core.DataProviders;
 using Shop.Storage.Interfaces.DataProviders;
 using Shop.Storage.Models;
 
-namespace Shop.Core.ListHolders
+namespace Shop.Api.Core.ListHolders
 {
     public sealed class ProductListHolder
     {

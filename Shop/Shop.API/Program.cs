@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using Shop.Core;
+using Shop.Api.Core;
 
-namespace Shop.WebAPI
+namespace Shop.API
 {
     public static class Program
     {

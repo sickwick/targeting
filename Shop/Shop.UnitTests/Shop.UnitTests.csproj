@@ -4,6 +4,8 @@
         <TargetFramework>netcoreapp3.1</TargetFramework>
 
         <IsPackable>false</IsPackable>
+
+        <RootNamespace>Shop.UnitTests</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -14,9 +16,9 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Shop.API\Shop.API.csproj" />
       <ProjectReference Include="..\Shop.Database\Shop.Database.csproj" />
       <ProjectReference Include="..\Shop.Targeting\Shop.Targeting.csproj" />
-      <ProjectReference Include="..\Shop.WebAPI\Shop.WebAPI.csproj" />
     </ItemGroup>
 
 </Project>

@@ -5,15 +5,17 @@ VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Database", "Shop.Database\Shop.Database.csproj", "{50CF31C3-A90A-4761-98A6-A2F8013DEBDE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Tests", "Shop.Tests\Shop.Tests.csproj", "{60BE2AE3-ACD5-4304-8A0E-E8B700236286}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.UnitTests", "Shop.UnitTests\Shop.UnitTests.csproj", "{60BE2AE3-ACD5-4304-8A0E-E8B700236286}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Targeting", "Shop.Targeting\Shop.Targeting.csproj", "{9988CEBC-A85D-4345-BF60-15FD316010BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.WebAPI", "Shop.WebAPI\Shop.WebAPI.csproj", "{48F83606-9661-4CDD-94E5-86E502B5075A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.API", "Shop.API\Shop.API.csproj", "{48F83606-9661-4CDD-94E5-86E502B5075A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Core", "Shop.Core\Shop.Core.csproj", "{E920FCA0-B7E1-4EBC-BE5E-8A40089926C6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Api.Core", "Shop.Api.Core\Shop.Api.Core.csproj", "{E920FCA0-B7E1-4EBC-BE5E-8A40089926C6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Storage", "Shop.Storage\Shop.Storage.csproj", "{3E571094-5AEE-4FC4-99EC-7000C03D8DCC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E300AAD8-40CB-4BC8-A030-50C0D4EAB58A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,5 +53,8 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {16901B73-9834-409B-AAB2-B759ECAAD56B}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{60BE2AE3-ACD5-4304-8A0E-E8B700236286} = {E300AAD8-40CB-4BC8-A030-50C0D4EAB58A}
 	EndGlobalSection
 EndGlobal
