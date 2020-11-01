@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.Extensions.Caching.Memory;
-using Shop.Storage.Interfaces.DataProviders;
-using Shop.Storage.Models;
+using Shop.Api.Data.Abstract;
+using Shop.Api.Data.Models;
+using Shop.Database;
 
-namespace Shop.Database.Stubs
+namespace Shop.UnitTests.Stubs
 {
     public class ProductDataProviderStub : IProductDataProvider
     {
@@ -20,9 +21,9 @@ namespace Shop.Database.Stubs
             _stub = new ProductsStub();
         }
 
-        public List<Product> GetProducts()
+        public List<ProductDto> GetProducts()
         {
-            var productList = new List<Product>();
+            var productList = new List<ProductDto>();
             for (int i = 0; i < 5; i++)
             {
                 productList.AddRange(_stub.Products);
@@ -31,12 +32,12 @@ namespace Shop.Database.Stubs
             return productList;
         }
 
-        public bool AddProductInDatabase(Product product)
+        public bool AddProductInDatabase(ProductDto product)
         {
             return true;
         }
 
-        private void SetCache(List<Product> productList, int lifeTime)
+        private void SetCache(List<ProductDto> productList, int lifeTime)
         {
             _cache.Set(CacheName, productList, new MemoryCacheEntryOptions
             {

@@ -4,8 +4,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Shop.Api.Core.Abstract;
 using Shop.Api.Core.Services;
-using Shop.Database.Stubs;
-using Shop.Storage.Interfaces.DataProviders;
+using Shop.Api.Data.Abstract;
+using Shop.UnitTests.Stubs;
 
 namespace Shop.UnitTests
 {

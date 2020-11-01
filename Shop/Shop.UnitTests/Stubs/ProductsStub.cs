@@ -1,13 +1,13 @@
 using System.Collections.Generic;
-using Shop.Api.Core.Models;
+using Shop.Api.Data.Models;
 
-namespace DatabaseStub
+namespace Shop.UnitTests.Stubs
 {
     public class ProductsStub
     {
-        public List<Product> Products = new List<Product> 
+        public List<ProductDto> Products = new List<ProductDto> 
         {
-            new Product()
+            new ProductDto()
             {
                 Id = "e23e23e23rf2f2f232xx3rc2xz",
                 Article = 12345, Category = "Limited", Label = "Nike",
@@ -23,18 +23,18 @@ namespace DatabaseStub
                     "https://static.nike.com/a/images/t_PDP_1280_v1/f_auto/leplgo42nzkdufz0vvor/кроссовки-air-jordan-legacy-312-low-mpV0mH.jpg",
                     "https://static.nike.com/a/images/t_PDP_1280_v1/f_auto/a2bvpg12f3fm58cgv7lm/кроссовки-air-jordan-legacy-312-low-mpV0mH.jpg"
                 },
-                SizesAvailable = new List<Sizes>
+                SizesAvailable = new List<SizesDto>
                 {
-                    new Sizes()
+                    new SizesDto()
                     {
                         Size = 13.5,
-                        Availability = new Availability {IsAvailable = true, QuantityInStock = 4}
+                        Availability = new AvailabilityDto {IsAvailable = true, QuantityInStock = 4}
 
                     }
                 },
                 Price =  8250
             },
-            new Product()
+            new ProductDto()
             {
                 Id = "e23e23e23rf2f2f232xxew3123",
                 Article = 12454, Category = "Classic", Label = "Nike",
@@ -43,26 +43,26 @@ namespace DatabaseStub
                 {
                     "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/ga0g0giyocrvslw07rhc/кроссовки-air-force-1-07-6jXPDp.jpg",
                 },
-                SizesAvailable = new List<Sizes>()
+                SizesAvailable = new List<SizesDto>()
                 {
-                    new Sizes()
+                    new SizesDto()
                     {
                         Size = 11,
-                        Availability = new Availability {IsAvailable = true, QuantityInStock = 28}
+                        Availability = new AvailabilityDto {IsAvailable = true, QuantityInStock = 28}
                     },
-                    new Sizes()
+                    new SizesDto()
                     {
                         Size = 12,
-                        Availability = new Availability {IsAvailable = false, QuantityInStock = 0}
+                        Availability = new AvailabilityDto {IsAvailable = false, QuantityInStock = 0}
                     },
-                    new Sizes()
+                    new SizesDto()
                     {
                         Size = 13,
-                        Availability = new Availability {IsAvailable = true, QuantityInStock = 2}
+                        Availability = new AvailabilityDto {IsAvailable = true, QuantityInStock = 2}
                     },
                 }
             },
-            new Product
+            new ProductDto
             {
                 Id = "e23e23e23rf2f2f232xx3rc2xz",
                 Article = 12345, Category = "Limited", Label = "Nike",
@@ -71,16 +71,16 @@ namespace DatabaseStub
                 {
                     "https://c.static-nike.com/a/images/t_prod_ss/w_480,c_limit,q_auto,f_auto/yhx8mbkb2yfqkcuqg8lc/air-force-1-cactus-jack-release-date.jpg"
                 },
-                SizesAvailable = new List<Sizes>()
+                SizesAvailable = new List<SizesDto>()
                 {
-                    new Sizes()
+                    new SizesDto()
                     {
                         Size = 14,
-                        Availability = new Availability {IsAvailable = true, QuantityInStock = 4}
+                        Availability = new AvailabilityDto {IsAvailable = true, QuantityInStock = 4}
                     }
                 }
             },
-            new Product
+            new ProductDto
             {
                 Id = "e23e23e23rf2f2f232xxew3123",
                 Article = 12454, Category = "Classic", Label = "Nike",
@@ -89,22 +89,22 @@ namespace DatabaseStub
                 {
                     "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/ga0g0giyocrvslw07rhc/кроссовки-air-force-1-07-6jXPDp.jpg"
                 },
-                SizesAvailable = new List<Sizes>()
+                SizesAvailable = new List<SizesDto>()
                 {
-                    new Sizes()
+                    new SizesDto()
                     {
                         Size = 11,
-                        Availability = new Availability {IsAvailable = true, QuantityInStock = 28}
+                        Availability = new AvailabilityDto {IsAvailable = true, QuantityInStock = 28}
                     },
-                    new Sizes()
+                    new SizesDto()
                     {
                         Size = 12,
-                        Availability = new Availability {IsAvailable = false, QuantityInStock = 0}
+                        Availability = new AvailabilityDto {IsAvailable = false, QuantityInStock = 0}
                     },
-                    new Sizes()
+                    new SizesDto()
                     {
                         Size = 13,
-                        Availability = new Availability {IsAvailable = true, QuantityInStock = 2}
+                        Availability = new AvailabilityDto {IsAvailable = true, QuantityInStock = 2}
                     },
                 }
             }
