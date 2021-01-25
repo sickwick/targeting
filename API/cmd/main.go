@@ -1,19 +1,19 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/go-redis/redis"
+	"fmt"
+	"github.com/gorilla/mux"
 	"github.com/sickwick/SneakerShop/API/pkg/api"
+	"net/http"
 )
 
 func main() {
-	r := gin.Default()
+	r := mux.NewRouter()
+	r.HandleFunc("/api/products", api.GetAllProducts)
+	//r.HandleFunc("api/products/product")
 	//redisClient := services.CreateRedisClient("localhost", "6379")
-	redisClient := redis.NewClient(&redis.Options{
-		Addr: "localhost:6379",
-	})
-	r.GET("api/products", api.GetAllProducts)
-	r.GET("api/products/product", func(context *gin.Context) { api.GetProduct(context, redisClient) })
+	http.Handle("/", r)
+	fmt.Println("Start server")
+	http.ListenAndServe(":8081", nil)
 
-	r.Run()
 }
