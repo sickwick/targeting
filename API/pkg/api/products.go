@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis"
-	"github.com/sickwick/models"
+	"github.com/sickwick/SneakerShop/webApi/pkg/models"
 	"io/ioutil"
 	"net/http"
 	"time"
@@ -52,7 +52,13 @@ func GetProduct(context *gin.Context, redisClient *redis.Client) {
 	if err != nil {
 	}
 
-	defer resp.Body.Close()
+	defer func() {
+		if err := recover(); err != nil {
+			fmt.Println(err)
+			context.JSON(404, gin.H{"error": err})
+			resp.Body.Close()
+		}
+	}()
 
 	if resp.StatusCode == 200 {
 		body, err := ioutil.ReadAll(resp.Body)
