@@ -1,2 +1,1 @@
 # Sneaker Shop
-ui
