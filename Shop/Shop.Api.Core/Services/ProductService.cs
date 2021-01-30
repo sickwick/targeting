@@ -21,13 +21,13 @@ namespace Shop.Api.Core.Services
             _mapper = mapper;
         }
 
-        public List<Product> GetAllProducts()
+        public List<ProductDto> GetAllProducts()
         {
             var products = _productDataProvider.GetProducts();
             if (!products.IsNullOrEmpty())
             {
-                var result = _mapper.Map<List<Product>>(products);
-                return result;
+                // var result = _mapper.Map<List<ProductDto>>(products);
+                return products;
             }
 
             throw new NullReferenceException();
