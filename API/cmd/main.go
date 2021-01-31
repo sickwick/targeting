@@ -44,7 +44,8 @@ func CreateServer() {
 	//redisClient := services.CreateRedisClient("localhost", "6379")
 	http.Handle("/", r)
 	fmt.Println("Start server")
-	http.ListenAndServe(Configuration.Server.Port, nil)
+	log.Println(Configuration.Server.Port)
+	http.ListenAndServe(":"+Configuration.Server.Port, nil)
 }
 
 func CreateRouter() *mux.Router {

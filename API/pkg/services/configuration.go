@@ -17,14 +17,11 @@ func GetConfig() {
 		if err != nil {
 			log.Fatal(err.Error())
 		}
-	case "Prod":
+	default:
 		err := gonfig.GetConf("configs/appsettings.production.json", &Configuration)
 		if err != nil {
 			log.Fatal(err.Error())
 		}
-	default:
-		log.Println(os.Getenv("ENVIRONMENT"))
-		log.Fatal("Can't find config")
 	}
 
 	return

@@ -6,6 +6,7 @@ import (
 	"github.com/sickwick/SneakerShop/API/pkg/models"
 	"github.com/sickwick/SneakerShop/API/pkg/services"
 	"io/ioutil"
+	"log"
 	"net/http"
 )
 
@@ -13,7 +14,8 @@ func GetAllProducts(writer http.ResponseWriter, request *http.Request) {
 	var response []models.Product
 	dbOptions := services.Configuration.Database
 	bdUrl := dbOptions.Host + ":" + dbOptions.Port
-	resp, err := http.Get(bdUrl + "/api/products")
+	log.Println(bdUrl)
+	resp, err := http.Get("http://" + bdUrl + "/api/products")
 
 	if err != nil {
 		panic(err.Error())
