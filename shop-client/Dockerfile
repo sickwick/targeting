@@ -7,4 +7,4 @@ RUN npm install && npm install -g @angular/cli && npm cache clean --force
 
 COPY . /app
 
-CMD ng serve --host 0.0.0.0
+CMD ng serve --host 0.0.0.0 --prod

@@ -19,7 +19,7 @@ namespace Shop.Database.MongoDB
             var login = Environment.GetEnvironmentVariable("DB_LOGIN");
             var password = Environment.GetEnvironmentVariable("DB_PASSWORD");
             var client = new MongoClient(
-                $"mongodb+srv://{login}:{password}@{_databaseName}-dlcu6.azure.mongodb.net/test?retryWrites=true&w=majority");
+                $"mongodb+srv://admin:adminadmin@Helper-dlcu6.azure.mongodb.net/test?retryWrites=true&w=majority");
             var database = client.GetDatabase(_collectionName);
             return database;
         }
