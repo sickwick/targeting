@@ -33,16 +33,16 @@ namespace Shop.Api.Core.Services
             throw new NullReferenceException();
         }
 
-        public Product GetProduct(long article)
+        public ProductDto GetProduct(long article)
         {
-            var products = _mapper.Map<List<Product>>(_productDataProvider.GetProducts());
+            var products = _productDataProvider.GetProducts();
             if (CheckParameterCorrect(article) && products.Any(p => p.Article == article))
                 return products.FirstOrDefault(p => p.Article == article);
 
             throw new ArgumentException("�������� �� ������ ��������", nameof(article));
         }
 
-        public List<Sizes> GetSizes(long article)
+        public List<SizesDto> GetSizes(long article)
         {
             if (CheckParameterCorrect(article)) return GetProduct(article).SizesAvailable.ToList();
 
