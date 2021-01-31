@@ -4,23 +4,33 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/sickwick/SneakerShop/API/pkg/models"
+	"github.com/sickwick/SneakerShop/API/pkg/services"
 	"io/ioutil"
 	"net/http"
 )
 
 func GetAllProducts(writer http.ResponseWriter, request *http.Request) {
 	var response []models.Product
-
-	resp, err := http.Get("http://host.docker.internal:5000/api/products")
+	dbOptions := services.Configuration.Database
+	bdUrl := dbOptions.Host + ":" + dbOptions.Port
+	resp, err := http.Get(bdUrl + "/api/products")
 
 	if err != nil {
-		panic(err)
+		panic(err.Error())
 	}
 
 	if resp == nil {
 		panic("response -  null")
 	}
-	defer resp.Body.Close()
+
+	defer func() {
+		resp.Body.Close()
+		if err := recover(); err != nil {
+			writer.WriteHeader(http.StatusBadRequest)
+			fmt.Fprint(writer, "Failed to load product list")
+		}
+		return
+	}()
 
 	if resp.StatusCode == 200 {
 		body, err := ioutil.ReadAll(resp.Body)
@@ -40,12 +50,6 @@ func GetAllProducts(writer http.ResponseWriter, request *http.Request) {
 		fmt.Fprintf(writer, string(resp))
 		return
 	}
-	defer func() {
-		if err := recover(); err != nil {
-			writer.WriteHeader(http.StatusBadRequest)
-			fmt.Fprint(writer, "Failed to load product list")
-		}
-	}()
 }
 
 //func GetProduct(writer http.ResponseWriter, request *http.Request, redisClient *redis.Client) {
