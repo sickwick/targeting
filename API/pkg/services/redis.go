@@ -2,10 +2,13 @@ package services
 
 import "github.com/go-redis/redis"
 
-func CreateRedisClient(host string, port string) redis.Client {
-	client := redis.NewClient(&redis.Options{
-		Addr: host + ":" + port,
+var RedisClient = createRedisClient()
+
+func createRedisClient() *redis.Client {
+	redisOptions := Configuration.Redis
+	redisClient := redis.NewClient(&redis.Options{
+		Addr: "http://" + redisOptions.Host + ":" + redisOptions.Port,
 	})
 
-	return *client
+	return redisClient
 }

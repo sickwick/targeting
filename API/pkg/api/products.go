@@ -3,36 +3,27 @@ package api
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/gorilla/mux"
 	"github.com/sickwick/SneakerShop/API/pkg/models"
-	"github.com/sickwick/SneakerShop/API/pkg/services"
+	. "github.com/sickwick/SneakerShop/API/pkg/services"
 	"io/ioutil"
 	"log"
 	"net/http"
+	"time"
 )
 
 func GetAllProducts(writer http.ResponseWriter, request *http.Request) {
+	var dbUrl = Configuration.Database.Host + ":" + Configuration.Database.Port
+
 	var response []models.Product
-	dbOptions := services.Configuration.Database
-	bdUrl := dbOptions.Host + ":" + dbOptions.Port
-	log.Println(bdUrl)
-	resp, err := http.Get("http://" + bdUrl + "/api/products")
+	log.Println(dbUrl)
+	resp, err := http.Get("http://" + dbUrl + "/api/products")
 
 	if err != nil {
-		panic(err.Error())
+		log.Println(err.Error())
 	}
 
-	if resp == nil {
-		panic("response -  null")
-	}
-
-	defer func() {
-		resp.Body.Close()
-		if err := recover(); err != nil {
-			writer.WriteHeader(http.StatusBadRequest)
-			fmt.Fprint(writer, "Failed to load product list")
-		}
-		return
-	}()
+	defer resp.Body.Close()
 
 	if resp.StatusCode == 200 {
 		body, err := ioutil.ReadAll(resp.Body)
@@ -54,51 +45,51 @@ func GetAllProducts(writer http.ResponseWriter, request *http.Request) {
 	}
 }
 
-//func GetProduct(writer http.ResponseWriter, request *http.Request, redisClient *redis.Client) {
-//	var response models.Product
-//	productArticle := context.Query("article")
-//
-//	if cachedData, err := redisClient.Get(productArticle).Result(); err == nil && cachedData != "" {
-//		context.JSON(200, cachedData)
-//		return
-//	}
-//
-//	resp, err := http.Get("http://localhost:5000/api/products/product?article=" + productArticle)
-//
-//	if err != nil {
-//	}
-//
-//	defer func() {
-//		if err := recover(); err != nil {
-//			fmt.Println(err)
-//			context.JSON(404, gin.H{"error": err})
-//			resp.Body.Close()
-//		}
-//	}()
-//
-//	if resp.StatusCode == 200 {
-//		body, err := ioutil.ReadAll(resp.Body)
-//		if err != nil {
-//		}
-//		err = json.Unmarshal(body, &response)
-//		if err != nil {
-//			fmt.Println(err)
-//		}
-//
-//		redisResponse, err := json.Marshal(response)
-//		if err != nil {
-//			fmt.Println(err)
-//		}
-//
-//		err = redisClient.Set(productArticle, redisResponse, 10*time.Hour).Err()
-//		if err != nil {
-//			fmt.Println(err)
-//		}
-//
-//		context.JSON(200, response)
-//		return
-//	}
-//	context.JSON(404, gin.H{
-//		"message": "Article not found",
-//	})
-//}
+func GetProduct(writer http.ResponseWriter, request *http.Request) {
+	var dbUrl = Configuration.Database.Host + ":" + Configuration.Database.Port
+
+	var modelResponse models.Product
+	productArticle := mux.Vars(request)["article"]
+
+	if cachedData, err := RedisClient.Get(productArticle).Result(); err == nil && cachedData != "" {
+		writer.WriteHeader(http.StatusOK)
+		fmt.Fprint(writer, cachedData)
+		return
+	}
+
+	resp, err := http.Get("http://" + dbUrl + "/api/products/product?article=" + productArticle)
+
+	if err != nil {
+		log.Println(err.Error())
+	}
+
+	defer resp.Body.Close()
+
+	if resp.StatusCode == 200 {
+		body, err := ioutil.ReadAll(resp.Body)
+		if err != nil {
+		}
+		err = json.Unmarshal(body, &modelResponse)
+		if err != nil {
+			fmt.Println(err)
+		}
+
+		response, err := json.Marshal(modelResponse)
+		if err != nil {
+			fmt.Println(err)
+		}
+
+		answer := string(response)
+		err = RedisClient.Set("test", "test1", 0).Err()
+		err = RedisClient.Set(productArticle, answer, Configuration.Redis.Expiration*time.Hour).Err()
+		if err != nil {
+			fmt.Println(err)
+		}
+
+		writer.WriteHeader(http.StatusOK)
+		fmt.Fprint(writer, answer)
+		return
+	}
+	writer.WriteHeader(http.StatusNotFound)
+	fmt.Fprint(writer, "Article not found")
+}

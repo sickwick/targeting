@@ -1,5 +1,7 @@
 package models
 
+import "time"
+
 type AppOptions struct {
 	Server struct {
 		Host string
@@ -9,5 +11,11 @@ type AppOptions struct {
 	Database struct {
 		Host string
 		Port string
+	}
+
+	Redis struct {
+		Host       string
+		Port       string
+		Expiration time.Duration
 	}
 }

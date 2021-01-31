@@ -3,11 +3,9 @@ package main
 import (
 	"errors"
 	"fmt"
-	"github.com/gorilla/mux"
-	"github.com/sickwick/SneakerShop/API/pkg/api"
+	"github.com/sickwick/SneakerShop/API/pkg/server"
 	. "github.com/sickwick/SneakerShop/API/pkg/services"
 	"log"
-	"net/http"
 )
 
 func main() {
@@ -34,27 +32,8 @@ func run() error {
 	}()
 
 	GetConfig()
-	CreateServer()
+	server.CreateServer()
+	//CreateRedisClient()
 
 	return err
-}
-
-func CreateServer() {
-	r := CreateRouter()
-	//redisClient := services.CreateRedisClient("localhost", "6379")
-	http.Handle("/", r)
-	fmt.Println("Start server")
-	log.Println(Configuration.Server.Port)
-	http.ListenAndServe(":"+Configuration.Server.Port, nil)
-}
-
-func CreateRouter() *mux.Router {
-	r := mux.NewRouter()
-	r.HandleFunc("/api/products", api.GetAllProducts)
-	r.HandleFunc("/test", func(writer http.ResponseWriter, request *http.Request) {
-		writer.WriteHeader(http.StatusOK)
-		fmt.Fprint(writer, "test func works")
-	})
-	//r.HandleFunc("api/products/product")
-	return r
 }

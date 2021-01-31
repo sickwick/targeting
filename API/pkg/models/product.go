@@ -1,24 +1,24 @@
 package models
 
 type Product struct {
-	Article        int
-	About          string
-	Category       string
-	Title          string
-	Label          string
-	Season         string
-	Gender         bool
-	Photos         []string
-	Price          float32
-	SizesAvailable []Sizes
+	Article        int      `json:"article"`
+	About          string   `json:"about"`
+	Category       string   `json:"category"`
+	Title          string   `json:"title"`
+	Label          string   `json:"label"`
+	Season         string   `json:"season"`
+	Gender         bool     `json:"gender"`
+	Photos         []string `json:"photo"`
+	Price          float32  `json:"price"`
+	SizesAvailable []Sizes  `json:"sizesAvailable"`
 }
 
 type Sizes struct {
-	Size         float32
-	Availability Availability
+	Size         float32      `json:"size"`
+	Availability Availability `json:"availability"`
 }
 
 type Availability struct {
-	IsAvailable     bool
-	QuantityInStock int
+	IsAvailable     bool `json:"isAvailable"`
+	QuantityInStock int  `json:"quantityInStock"`
 }
