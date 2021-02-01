@@ -1,13 +1,16 @@
-FROM golang:alpine as build
+FROM golang:alpine as deps
 EXPOSE 9001
-WORKDIR /build
-COPY ./ ./
+WORKDIR /
 
-RUN apk --update --no-cache add git
+COPY ./go.mod ./
+COPY ./go.sum ./
 RUN go mod download -x
-RUN go build -o server ./cmd/main.go
+
+FROM deps AS builder
+COPY ./ ./
+RUN go build -v -o /bin/server ./cmd/main.go
 
 FROM arm64v8/golang:alpine
 WORKDIR /app
-COPY --from=build /build/server server
-CMD "/app/server"
+COPY --from=builder /bin/server ./
+CMD ["./server"]
