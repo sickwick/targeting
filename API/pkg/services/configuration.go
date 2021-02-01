@@ -7,22 +7,22 @@ import (
 	"os"
 )
 
-var Configuration = AppOptions{}
+var Configuration = GetConfig()
 
-func GetConfig() {
-
+func GetConfig() *AppOptions {
+	config := AppOptions{}
 	switch os.Getenv("ENVIRONMENT") {
 	case "Dev":
-		err := gonfig.GetConf("configs/appsettings.development.json", &Configuration)
+		err := gonfig.GetConf("configs/appsettings.development.json", &config)
 		if err != nil {
 			log.Fatal(err.Error())
 		}
 	default:
-		err := gonfig.GetConf("configs/appsettings.production.json", &Configuration)
+		err := gonfig.GetConf("configs/appsettings.production.json", &config)
 		if err != nil {
 			log.Fatal(err.Error())
 		}
 	}
 
-	return
+	return &config
 }

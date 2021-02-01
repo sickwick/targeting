@@ -54,6 +54,7 @@ func GetProduct(writer http.ResponseWriter, request *http.Request) {
 	if cachedData, err := RedisClient.Get(productArticle).Result(); err == nil && cachedData != "" {
 		writer.WriteHeader(http.StatusOK)
 		fmt.Fprint(writer, cachedData)
+		log.Println("return from here")
 		return
 	}
 
@@ -80,10 +81,10 @@ func GetProduct(writer http.ResponseWriter, request *http.Request) {
 		}
 
 		answer := string(response)
-		err = RedisClient.Set("test", "test1", 0).Err()
+		//err = RedisClient.Set("test", "test1", 0).Err()
 		err = RedisClient.Set(productArticle, answer, Configuration.Redis.Expiration*time.Hour).Err()
 		if err != nil {
-			fmt.Println(err)
+			fmt.Println("redis - ", err)
 		}
 
 		writer.WriteHeader(http.StatusOK)

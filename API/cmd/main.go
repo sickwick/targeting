@@ -10,6 +10,15 @@ import (
 
 func main() {
 	log.Fatal(run())
+	//rds:= redis.NewClient(&redis.Options{
+	//	Addr: "localhost:6379",
+	//	Password: "",
+	//	DB: 0,
+	//})
+	//err:=rds.Set("test", "qwerty", 0).Err()
+	//if err!=nil{
+	//	fmt.Println(err)
+	//}
 	return
 }
 
