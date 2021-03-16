@@ -21,28 +21,35 @@ namespace Shop.Api.Core.Services
             _mapper = mapper;
         }
 
-        public List<ProductDto> GetAllProducts()
+        public List<Product> GetAllProducts()
         {
             var products = _productDataProvider.GetProducts();
             if (!products.IsNullOrEmpty())
             {
-                // var result = _mapper.Map<List<ProductDto>>(products);
-                return products;
+                var result = new List<Product>();
+                foreach (var product in products)
+                {
+                    result.Add(_mapper.Map<ProductDto, Product>(product));
+                }
+                return result;
             }
 
             throw new NullReferenceException();
         }
 
-        public ProductDto GetProduct(long article)
+        public Product GetProduct(long article)
         {
             var products = _productDataProvider.GetProducts();
             if (CheckParameterCorrect(article) && products.Any(p => p.Article == article))
-                return products.FirstOrDefault(p => p.Article == article);
+            {
+                var product =  products.FirstOrDefault(p => p.Article == article);
+                return _mapper.Map<ProductDto,Product>(product);
+            }
 
             throw new ArgumentException("�������� �� ������ ��������", nameof(article));
         }
 
-        public List<SizesDto> GetSizes(long article)
+        public List<Sizes> GetSizes(long article)
         {
             if (CheckParameterCorrect(article)) return GetProduct(article).SizesAvailable.ToList();
 

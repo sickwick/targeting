@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using Shop.Api.Config;
+using Shop.Api.Core.Services;
 
 namespace Shop.API
 {
@@ -27,7 +28,7 @@ namespace Shop.API
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             );
             services.AddCors();
-            services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(typeof(MapperConfig));
 
             services.AddApplicationServices();
         }
